@@ -46,7 +46,8 @@
  */
 
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle, Sparkles, Heart, Zap, Star } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, CheckCircle, Sparkles, Heart, Zap, Star, Code, Smartphone, Bot } from "lucide-react";
 
 interface LandingPageProps {
   heading?: string;
@@ -183,6 +184,83 @@ export const LandingPage = ({
                 ))}
               </ul>
             </div>
+          </div>
+        </div>
+
+        {/* Template Showcase Section */}
+        <div className="w-full max-w-6xl mx-auto mt-12 sm:mt-16 lg:mt-20 px-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
+              Why Choose This Template?
+            </h3>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+              Built with real-world patterns and designed for rapid development
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="border-green-200 dark:border-green-800/30 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-900/10 dark:to-emerald-900/10">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                    <Code className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-green-800 dark:text-green-200">Production-Ready Components</CardTitle>
+                    <CardDescription className="text-green-600 dark:text-green-400">
+                      Real patterns from successful apps
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-green-700 dark:text-green-300">
+                  Every component is extracted from production applications and battle-tested for real-world use cases.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-blue-200 dark:border-blue-800/30 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-900/10 dark:to-purple-900/10">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                    <Smartphone className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-blue-800 dark:text-blue-200">Mobile-First Design</CardTitle>
+                    <CardDescription className="text-blue-600 dark:text-blue-400">
+                      Responsive layouts for all devices
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  Responsive grids that adapt seamlessly: 1 column on mobile, 2 on tablet, 3 on desktop with perfect touch targets.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-purple-200 dark:border-purple-800/30 bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/10 dark:to-pink-900/10 sm:col-span-2 lg:col-span-1">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                    <Bot className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-purple-800 dark:text-purple-200">Agent-Friendly Code</CardTitle>
+                    <CardDescription className="text-purple-600 dark:text-purple-400">
+                      Built for AI agents to easily adapt
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-purple-700 dark:text-purple-300">
+                  Comprehensive documentation and clear patterns make it easy for AI agents to adapt components for any industry.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

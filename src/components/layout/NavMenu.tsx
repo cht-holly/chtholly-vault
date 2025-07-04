@@ -51,11 +51,14 @@ import {
 import { cn } from "@/lib/utils"
 
 // CUSTOMIZE THIS: Replace with your industry-specific examples
-const examples: { title: string; href: string; description: string }[] = [
+const examples: { title: string; href: string; description: string; onClick?: () => void }[] = [
   {
     title: "Goal Setting",
-    href: "/examples/goals",
+    href: "#",
     description: "Interactive goal-setting interface with personalization wizard and achievement tracking.",
+    onClick: () => {
+      window.dispatchEvent(new CustomEvent('navigate-to-example', { detail: 'goals' }))
+    }
   },
   {
     title: "Photo Portfolio", 
@@ -138,6 +141,7 @@ export function NavMenu({
                   key={example.title}
                   title={example.title}
                   href={example.href}
+                  onClick={example.onClick}
                 >
                   {example.description}
                 </ListItem>
@@ -153,10 +157,22 @@ export function NavMenu({
   )
 }
 
+interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
+  title?: string;
+  onClick?: () => void;
+}
+
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  ListItemProps
+>(({ className, title, children, onClick, ...props }, ref) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault()
+      onClick()
+    }
+  }
+
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -166,6 +182,7 @@ const ListItem = React.forwardRef<
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
+          onClick={handleClick}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>

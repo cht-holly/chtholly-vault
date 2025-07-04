@@ -19,9 +19,8 @@
  * - Navigation + Landing Page + Features layout
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from './components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
 import { ThemeProvider } from './components/theme/provider'
 import { NavBar } from './components/layout/NavBar'
 import { LandingPage } from './components/layout/LandingPage'
@@ -33,6 +32,22 @@ function App() {
   const [selectedTab, setSelectedTab] = useState<'all' | 'popular' | 'featured'>('all')
   const [currentView, setCurrentView] = useState<'home' | 'features'>('home')
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  
+  // Handle navigation from Examples menu
+  useEffect(() => {
+    const handleNavigation = (event: CustomEvent) => {
+      if (event.detail === 'goals') {
+        setCurrentView('features')
+      }
+    }
+
+    // Listen for navigation events
+    window.addEventListener('navigate-to-example' as any, handleNavigation as any)
+    
+    return () => {
+      window.removeEventListener('navigate-to-example' as any, handleNavigation as any)
+    }
+  }, [])
   
   const getDisplayItems = () => {
     switch (selectedTab) {
@@ -92,7 +107,7 @@ function App() {
               heading="AI Agent-Friendly React Template"
               subheading="Built for Rapid Development"
               subtitle="A comprehensive React TypeScript template designed specifically for AI agents to quickly build modern, responsive applications for any industry."
-              ctaText="Explore Goals"
+              ctaText="Explore Examples"
               ctaTextMobile="Explore"
               onCtaClick={handleGetStarted}
               primaryFeatureTitle="Agent-Optimized"
@@ -143,51 +158,6 @@ function App() {
                   onItemSelect={handleItemSelect}
                   onFlowComplete={handleFlowComplete}
                 />
-
-                {/* Template Information Cards */}
-                <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Production-Ready Components</CardTitle>
-                      <CardDescription>
-                        Real patterns from a successful app
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        The grid above demonstrates real component patterns extracted from a production subliminal app.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Mobile-First Design</CardTitle>
-                      <CardDescription>
-                        Responsive layouts that work on all devices
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        Notice how the grid adapts: 1 column on mobile, 2 on tablet, 3 on desktop.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Agent-Friendly Code</CardTitle>
-                      <CardDescription>
-                        Built for AI agents to easily adapt
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        Every component includes comprehensive documentation for AI agents to adapt to any industry.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
               </div>
             </div>
           )}
