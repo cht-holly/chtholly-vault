@@ -1,22 +1,14 @@
 /**
- * AGENT INSTRUCTION: Main App Component
+ * AGENT INSTRUCTION: Main App Component with Multi-Theme Support
  * 
- * This is the root component of the React TypeScript template.
- * It demonstrates the basic structure and patterns to follow.
+ * This demonstrates how to implement a multi-theme system that adapts
+ * the entire application's appearance based on the current view/industry.
  * 
- * When adapting for other industries:
- * 1. Replace the content with your industry-specific layout
- * 2. Keep the ThemeProvider wrapper for dark/light mode support
- * 3. Maintain the mobile-first responsive structure
- * 4. Add your routing logic (React Router) here
- * 5. Customize the navigation and landing page components
- * 
- * Key patterns to preserve:
- * - ThemeProvider for consistent theming
- * - Mobile-first responsive design
- * - Proper TypeScript typing
- * - Component composition structure
- * - Navigation + Landing Page + Features layout
+ * ADAPTATION GUIDE:
+ * 1. Add new theme variants in multi-provider.tsx
+ * 2. Define theme colors in index.css
+ * 3. Update navbar branding based on current view
+ * 4. Maintain responsive behavior across all themes
  */
 
 import { useState, useEffect } from 'react'
@@ -26,28 +18,30 @@ import { NavBar } from './components/layout/NavBar'
 import { LandingPage } from './components/layout/LandingPage'
 import { Footer } from './components/layout/Footer'
 import { ItemGrid } from './components/features/ItemGrid'
+import { PhotoGrid } from './components/features/gallery/PhotoGrid'
+import { PhotoHero } from './components/features/gallery/PhotoHero'
 import { sampleItems, getPopularItems, getFeaturedItems } from './data/sampleItems'
+import { samplePhotos } from './data/samplePhotos'
 import { BaseItem, BaseFlowData } from './types/base'
+import { PhotoItem } from './types/photography'
+
+// View state type
+type ViewState = 'landing' | 'goals' | 'photos'
 
 function App() {
-  const [selectedTab, setSelectedTab] = useState<'all' | 'popular' | 'featured'>('all')
-  const [currentView, setCurrentView] = useState<'home' | 'features'>('home')
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [currentView, setCurrentView] = useState<ViewState>('landing')
+  const [selectedTab, setSelectedTab] = useState<'all' | 'popular' | 'featured'>('all')
   
-  // Handle navigation from Examples menu
+  // Listen for custom navigation events
   useEffect(() => {
     const handleNavigation = (event: CustomEvent) => {
-      if (event.detail === 'goals') {
-        setCurrentView('features')
-      }
+      const view = event.detail as ViewState
+      setCurrentView(view)
     }
-
-    // Listen for navigation events
-    window.addEventListener('navigate-to-example' as any, handleNavigation as any)
     
-    return () => {
-      window.removeEventListener('navigate-to-example' as any, handleNavigation as any)
-    }
+    window.addEventListener('navigate-to-example', handleNavigation as EventListener)
+    return () => window.removeEventListener('navigate-to-example', handleNavigation as EventListener)
   }, [])
   
   const getDisplayItems = () => {
@@ -70,7 +64,13 @@ function App() {
   }
 
   const handleGetStarted = () => {
-    setCurrentView('features')
+    setCurrentView('photos')
+  }
+
+  const handlePhotoSelect = (photo: PhotoItem) => {
+    // For now, just log the photo selection
+    // In a real app, this would open a lightbox or detail view
+    console.log('Photo selected:', photo)
   }
 
   const handleSignIn = () => {
@@ -83,7 +83,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="chtholly-ui-theme">
-      <div className="min-h-screen bg-background text-foreground">
+      <div className={`min-h-screen bg-background text-foreground ${currentView === 'photos' ? 'photo-theme' : ''}`}>
         {/* Navigation Bar */}
         <NavBar
           brandName="Chtholly UI"
@@ -102,8 +102,8 @@ function App() {
         />
 
         {/* Main Content */}
-        <main className="">
-          {currentView === 'home' ? (
+        <main>
+          {currentView === 'landing' ? (
             <LandingPage
               heading="AI Agent-Friendly React Template"
               subheading="Built for Rapid Development"
@@ -114,7 +114,7 @@ function App() {
               primaryFeatureTitle="Agent-Optimized"
               secondaryFeatureTitle="Industry-Agnostic"
             />
-          ) : (
+          ) : currentView === 'goals' ? (
             <div className="container mx-auto px-4 py-8">
               <div className="max-w-6xl mx-auto">
                 {/* Hero Section */}
@@ -152,7 +152,7 @@ function App() {
                   </div>
                 </div>
 
-                {/* Item Grid - Real component from original app */}
+                {/* Item Grid */}
                 <ItemGrid 
                   items={getDisplayItems()}
                   title={`${selectedTab.charAt(0).toUpperCase() + selectedTab.slice(1)} Goals`}
@@ -164,7 +164,37 @@ function App() {
               {/* Footer for example page */}
               <Footer showAllSections={false} className="mt-12" />
             </div>
-          )}
+          ) : currentView === 'photos' ? (
+            <div className="min-h-screen">
+              {/* Photo Hero Section */}
+              <PhotoHero 
+                featuredPhoto={samplePhotos.find(p => p.isFeatured) || samplePhotos[0]}
+                title="Photography Portfolio"
+                subtitle="Discover stunning photography that captures life's most extraordinary moments"
+                ctaText="Explore Gallery"
+                onScrollToGallery={() => {
+                  const galleryElement = document.querySelector('[data-gallery-section]')
+                  if (galleryElement) {
+                    galleryElement.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+              />
+              
+              {/* Photo Gallery Section */}
+              <div className="container mx-auto px-4 py-16" data-gallery-section>
+                <div className="max-w-6xl mx-auto">
+                  {/* Photo Grid Component */}
+                  <PhotoGrid 
+                    photos={samplePhotos}
+                    onPhotoSelect={handlePhotoSelect}
+                  />
+                </div>
+                
+                {/* Footer for photo gallery page */}
+                <Footer showAllSections={false} className="mt-16" />
+              </div>
+            </div>
+          ) : null}
         </main>
       </div>
     </ThemeProvider>

@@ -1,6 +1,8 @@
 // Main component exports for easy importing
 export { ItemGrid } from './features/ItemGrid';
 export { PersonalizationWizard } from './features/wizard/PersonalizationWizard';
+export { PhotoGrid } from './features/gallery/PhotoGrid';
+export { PhotoHero } from './features/gallery/PhotoHero';
 export { LoginForm } from './auth/LoginForm';
 export { LandingPage } from './layout/LandingPage';
 export { NavBar } from './layout/NavBar';
@@ -9,6 +11,7 @@ export { NavMenu } from './layout/NavMenu';
 export { UserNav } from './layout/UserNav';
 export { Footer } from './layout/Footer';
 export { ThemeProvider, useTheme } from './theme/provider';
+export { MultiThemeProvider, useMultiTheme } from './theme/multi-provider';
 export { ThemeToggle } from './theme/toggle';
 
 // UI component re-exports

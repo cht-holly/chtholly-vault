@@ -62,8 +62,11 @@ const examples: { title: string; href: string; description: string; onClick?: ()
   },
   {
     title: "Photo Portfolio", 
-    href: "/examples/photo",
-    description: "Photography portfolio showcase with gallery layouts and booking systems.",
+    href: "#",
+    description: "Photography portfolio showcase with gallery layouts and advanced filtering capabilities.",
+    onClick: () => {
+      window.dispatchEvent(new CustomEvent('navigate-to-example', { detail: 'photos' }))
+    }
   },
   {
     title: "E-commerce",

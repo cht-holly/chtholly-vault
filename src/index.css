@@ -64,6 +64,57 @@
     overflow-x: hidden;
     max-width: 100%;
   }
+  
+  /* Photo gallery animations */
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  
+  .animate-slideInUp {
+    animation: slideInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .animate-slideInRight {
+    animation: slideInRight 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }
 
 @layer base {
@@ -121,6 +172,50 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  /* Photography Theme - Warm, elegant tones */
+  .theme-photography {
+    --background: 20 14.3% 4.1%;
+    --foreground: 43 7.7% 95.1%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 43 7.7% 95.1%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 43 7.7% 95.1%;
+    --primary: 43 89% 38%;
+    --primary-foreground: 20 14.3% 4.1%;
+    --secondary: 20 9.7% 15%;
+    --secondary-foreground: 43 7.7% 95.1%;
+    --muted: 20 9.7% 15%;
+    --muted-foreground: 43 5.8% 65%;
+    --accent: 20 9.7% 15%;
+    --accent-foreground: 43 7.7% 95.1%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 43 7.7% 95.1%;
+    --border: 20 9.7% 15%;
+    --input: 20 9.7% 15%;
+    --ring: 43 89% 38%;
+    --radius: 0.75rem;
+  }
+
+  .theme-photography.light {
+    --background: 43 10% 98%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 43 10% 98%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 43 10% 98%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 43 89% 25%;
+    --primary-foreground: 43 10% 98%;
+    --secondary: 43 4.8% 94.9%;
+    --secondary-foreground: 20 14.3% 4.1%;
+    --muted: 43 4.8% 94.9%;
+    --muted-foreground: 20 5.9% 35%;
+    --accent: 43 4.8% 94.9%;
+    --accent-foreground: 20 14.3% 4.1%;
+    --border: 43 13.3% 88.5%;
+    --input: 43 13.3% 88.5%;
+    --ring: 43 89% 25%;
+  }
 }
 
 @layer base {
@@ -130,4 +225,75 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Photo gallery theme adjustments - only affects navbar colors while preserving all functionality */
+.photo-theme nav {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo and brand text */
+.photo-theme nav .text-foreground {
+  color: white !important;
+}
+
+.photo-theme nav .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Logo brand name - override gradient with white text */
+.photo-theme nav .bg-gradient-to-r.from-blue-600.to-purple-600.bg-clip-text {
+  background: white !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: white !important;
+}
+
+/* Logo tagline text */
+.photo-theme nav .text-blue-500\/70,
+.photo-theme nav .text-blue-400\/70 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* All SVG icons (theme toggle, logos, etc.) */
+.photo-theme nav svg {
+  color: white !important;
+}
+
+/* Primary CTA button - gradient with white text */
+.photo-theme nav button.bg-gradient-to-r {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)) !important;
+  color: black !important;
+  border: none !important;
+}
+
+.photo-theme nav button.bg-gradient-to-r:hover {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.9)) !important;
+  color: black !important;
+}
+
+/* Secondary outline button */
+.photo-theme nav button:not(.bg-gradient-to-r):not([variant="ghost"]) {
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: transparent !important;
+}
+
+.photo-theme nav button:not(.bg-gradient-to-r):not([variant="ghost"]):hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Theme toggle button (ghost variant) */
+.photo-theme nav button[variant="ghost"] {
+  color: white !important;
+  background: transparent !important;
+}
+
+.photo-theme nav button[variant="ghost"]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
 }
