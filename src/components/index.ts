@@ -18,6 +18,7 @@ export { Input } from './ui/input';
 export { Label } from './ui/label';
 export { Progress } from './ui/progress';
 export { Textarea } from './ui/textarea';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
 export { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 export { 
   NavigationMenu, 

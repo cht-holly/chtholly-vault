@@ -237,12 +237,16 @@ Generic sample data with helper functions:
 
 ## Development Workflow
 
+### Status Updates Requirement
+**IMPORTANT**: When working on this project, always update your progress before your context runs out by creating a status update file named `STATUS_UPDATE_vX.md` where X is incremented from the previous version. This ensures continuity and tracks development progress.
+
 ### Adding New Components
 1. Create component in appropriate directory
 2. Add comprehensive agent documentation
 3. Include usage examples and industry adaptations
 4. Ensure mobile-first responsive design
 5. Add TypeScript interfaces and proper typing
+6. Update status in `STATUS_UPDATE_vX.md`
 
 ### Adapting for Industries
 1. Update type definitions in `src/types/`

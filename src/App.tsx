@@ -92,7 +92,7 @@ function App() {
               heading="AI Agent-Friendly React Template"
               subheading="Built for Rapid Development"
               subtitle="A comprehensive React TypeScript template designed specifically for AI agents to quickly build modern, responsive applications for any industry."
-              ctaText="Explore Components"
+              ctaText="Explore Examples"
               ctaTextMobile="Explore"
               onCtaClick={handleGetStarted}
               primaryFeatureTitle="Agent-Optimized"
@@ -101,28 +101,54 @@ function App() {
           ) : (
             <div className="container mx-auto px-4 py-8">
               <div className="max-w-6xl mx-auto">
-                {/* Navigation back to home */}
-                <div className="mb-8">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setCurrentView('home')}
-                    className="mb-4"
-                  >
-                    ← Back to Home
-                  </Button>
-                </div>
-
                 {/* Hero Section */}
                 <div className="text-center mb-12">
                   <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                    Component Showcase
+                    Examples
                   </h2>
                   <p className="text-lg text-muted-foreground mb-8">
-                    Real components from a production app - see how they work with sample data
+                    Interactive examples showcasing real components - see how they work with sample data
                   </p>
+                </div>
+
+                {/* Tab Navigation for Examples */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                  <div className="flex items-center gap-4">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setCurrentView('home')}
+                      className="flex items-center gap-2"
+                    >
+                      ← Back to Home
+                    </Button>
+                    
+                    {/* Example Type Tabs */}
+                    <div className="flex items-center gap-2 p-1 bg-muted rounded-md">
+                      <button
+                        className="px-3 py-1.5 text-sm font-medium rounded-sm bg-background text-foreground shadow-sm transition-all"
+                        disabled
+                      >
+                        Goal Setting UI
+                      </button>
+                      <button
+                        className="px-3 py-1.5 text-sm font-medium rounded-sm text-muted-foreground hover:text-foreground transition-all"
+                        disabled
+                        title="Coming Soon"
+                      >
+                        Photo App
+                      </button>
+                      <button
+                        className="px-3 py-1.5 text-sm font-medium rounded-sm text-muted-foreground hover:text-foreground transition-all"
+                        disabled
+                        title="Coming Soon"
+                      >
+                        E-commerce
+                      </button>
+                    </div>
+                  </div>
                   
-                  {/* Tab Navigation */}
-                  <div className="flex justify-center gap-2 mb-8">
+                  {/* Filter Tabs */}
+                  <div className="flex justify-center gap-2">
                     <Button 
                       variant={selectedTab === 'all' ? 'default' : 'outline'}
                       onClick={() => setSelectedTab('all')}

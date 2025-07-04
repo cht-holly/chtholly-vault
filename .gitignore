@@ -117,3 +117,8 @@ components.d.ts
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
+
+# Project planning and status files (not for public repo)
+STATUS_UPDATE_*.md
+TEMPLATE_REQUIREMENTS.md
+IMPLEMENTATION_PLAN.md
