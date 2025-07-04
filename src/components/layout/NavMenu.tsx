@@ -50,37 +50,37 @@ import {
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
 
-// CUSTOMIZE THIS: Replace with your industry-specific features
-const features: { title: string; href: string; description: string }[] = [
+// CUSTOMIZE THIS: Replace with your industry-specific examples
+const examples: { title: string; href: string; description: string }[] = [
   {
-    title: "Feature One",
-    href: "/features/one",
-    description: "Description of your first main feature that provides value to users.",
+    title: "Goal Setting",
+    href: "/examples/goals",
+    description: "Interactive goal-setting interface with personalization wizard and achievement tracking.",
   },
   {
-    title: "Feature Two", 
-    href: "/features/two",
-    description: "Description of your second feature that solves a specific problem.",
+    title: "Photo Portfolio", 
+    href: "/examples/photo",
+    description: "Photography portfolio showcase with gallery layouts and booking systems.",
   },
   {
-    title: "Feature Three",
-    href: "/features/three",
-    description: "Description of your third feature that enhances user experience.",
+    title: "E-commerce",
+    href: "/examples/ecommerce",
+    description: "Product catalog with shopping cart, filters, and checkout flow components.",
   },
   {
-    title: "Feature Four",
-    href: "/features/four",
-    description: "Description of your fourth feature that drives engagement.",
+    title: "Healthcare Portal",
+    href: "/examples/healthcare",
+    description: "Patient portal with appointment booking, medical records, and telemedicine features.",
   },
   {
-    title: "Feature Five",
-    href: "/features/five",
-    description: "Description of your fifth feature that adds significant value.",
+    title: "Education Platform",
+    href: "/examples/education",
+    description: "Learning management system with course catalog, progress tracking, and assignments.",
   },
   {
-    title: "Feature Six",
-    href: "/features/six",
-    description: "Description of your sixth feature that completes your offering.",
+    title: "Finance Dashboard",
+    href: "/examples/finance",
+    description: "Investment portfolio tracking with market analysis, charts, and financial planning tools.",
   },
 ]
 
@@ -130,16 +130,16 @@ export function NavMenu({
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Examples</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {features.map((feature) => (
+              {examples.map((example) => (
                 <ListItem
-                  key={feature.title}
-                  title={feature.title}
-                  href={feature.href}
+                  key={example.title}
+                  title={example.title}
+                  href={example.href}
                 >
-                  {feature.description}
+                  {example.description}
                 </ListItem>
               ))}
             </ul>

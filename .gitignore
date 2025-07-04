@@ -122,3 +122,5 @@ components.d.ts
 STATUS_UPDATE_*.md
 TEMPLATE_REQUIREMENTS.md
 IMPLEMENTATION_PLAN.md
+
+.github/

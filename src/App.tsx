@@ -92,7 +92,7 @@ function App() {
               heading="AI Agent-Friendly React Template"
               subheading="Built for Rapid Development"
               subtitle="A comprehensive React TypeScript template designed specifically for AI agents to quickly build modern, responsive applications for any industry."
-              ctaText="Explore Examples"
+              ctaText="Explore Goals"
               ctaTextMobile="Explore"
               onCtaClick={handleGetStarted}
               primaryFeatureTitle="Agent-Optimized"
@@ -104,57 +104,20 @@ function App() {
                 {/* Hero Section */}
                 <div className="text-center mb-12">
                   <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                    Examples
+                    Goal Setting & Achievement
                   </h2>
                   <p className="text-lg text-muted-foreground mb-8">
-                    Interactive examples showcasing real components - see how they work with sample data
+                    Discover goals that inspire you and create a personalized path to success
                   </p>
-                </div>
-
-                {/* Tab Navigation for Examples */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-                  <div className="flex items-center gap-4">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setCurrentView('home')}
-                      className="flex items-center gap-2"
-                    >
-                      ← Back to Home
-                    </Button>
-                    
-                    {/* Example Type Tabs */}
-                    <div className="flex items-center gap-2 p-1 bg-muted rounded-md">
-                      <button
-                        className="px-3 py-1.5 text-sm font-medium rounded-sm bg-background text-foreground shadow-sm transition-all"
-                        disabled
-                      >
-                        Goal Setting UI
-                      </button>
-                      <button
-                        className="px-3 py-1.5 text-sm font-medium rounded-sm text-muted-foreground hover:text-foreground transition-all"
-                        disabled
-                        title="Coming Soon"
-                      >
-                        Photo App
-                      </button>
-                      <button
-                        className="px-3 py-1.5 text-sm font-medium rounded-sm text-muted-foreground hover:text-foreground transition-all"
-                        disabled
-                        title="Coming Soon"
-                      >
-                        E-commerce
-                      </button>
-                    </div>
-                  </div>
                   
-                  {/* Filter Tabs */}
-                  <div className="flex justify-center gap-2">
+                  {/* Tab Navigation */}
+                  <div className="flex justify-center gap-2 mb-8">
                     <Button 
                       variant={selectedTab === 'all' ? 'default' : 'outline'}
                       onClick={() => setSelectedTab('all')}
                       size="sm"
                     >
-                      All Items
+                      All Goals
                     </Button>
                     <Button 
                       variant={selectedTab === 'popular' ? 'default' : 'outline'}
@@ -176,7 +139,7 @@ function App() {
                 {/* Item Grid - Real component from original app */}
                 <ItemGrid 
                   items={getDisplayItems()}
-                  title={`${selectedTab.charAt(0).toUpperCase() + selectedTab.slice(1)} Items`}
+                  title={`${selectedTab.charAt(0).toUpperCase() + selectedTab.slice(1)} Goals`}
                   onItemSelect={handleItemSelect}
                   onFlowComplete={handleFlowComplete}
                 />
