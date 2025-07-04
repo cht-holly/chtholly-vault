@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "description": "AI Agent Reference - Available components and patterns in this template",
+    "version": "1.0.0",
+    "purpose": "Provides context about what's available for AI agents to use creatively"
+  },
+  "availableComponents": {
+    "ui": [
+      "button", "card", "badge", "input", "label", "progress", "textarea",
+      "navigation-menu", "avatar", "dropdown-menu", "accordion", "alert-dialog",
+      "alert", "aspect-ratio", "breadcrumb", "calendar", "carousel", "chart"
+    ],
+    "layout": [
+      "NavBar", "Logo", "NavMenu", "UserNav", "LandingPage"
+    ],
+    "features": [
+      "ItemGrid", "PersonalizationWizard", "LoginForm"
+    ],
+    "theme": [
+      "ThemeProvider", "ThemeToggle"
+    ]
+  },
+  "corePatterns": {
+    "responsive": "Mobile-first with sm:, lg:, xl: breakpoints",
+    "theming": "Light/dark mode with CSS custom properties",
+    "components": "TypeScript interfaces, agent documentation included",
+    "data": "Generic BaseItem and BaseFlowData types"
+  },
+  "keyFiles": {
+    "types": "src/types/base.ts - Core type definitions",
+    "sampleData": "src/data/sampleItems.ts - Example data patterns",
+    "mainApp": "src/App.tsx - How components work together",
+    "componentIndex": "src/components/index.ts - All exports"
+  },
+  "adaptationPoints": {
+    "dataTypes": "Extend BaseItem/BaseFlowData in src/types/base.ts",
+    "sampleData": "Modify src/data/sampleItems.ts for your domain",
+    "styling": "Update tailwind.config.js for brand colors",
+    "components": "Each component has agent instructions in comments"
+  }
+}
