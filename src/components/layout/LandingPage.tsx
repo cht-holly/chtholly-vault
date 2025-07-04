@@ -48,6 +48,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, CheckCircle, Sparkles, Heart, Zap, Star, Code, Smartphone, Bot } from "lucide-react";
+import { Footer } from "./Footer";
 
 interface LandingPageProps {
   heading?: string;
@@ -140,7 +141,7 @@ export const LandingPage = ({
         </div>
 
         {/* Features Section */}
-        <div className="w-full max-w-5xl mx-auto mt-4 sm:mt-6 lg:mt-8">
+        <div className="w-full max-w-5xl mx-auto mt-2 sm:mt-3 lg:mt-4">
           {/* Simple tagline */}
           <div className="text-center mb-4 sm:mb-6">
             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium px-2">
@@ -188,7 +189,7 @@ export const LandingPage = ({
         </div>
 
         {/* Template Showcase Section */}
-        <div className="w-full max-w-6xl mx-auto mt-12 sm:mt-16 lg:mt-20 px-4">
+        <div className="w-full max-w-6xl mx-auto mt-6 sm:mt-8 lg:mt-10 px-4">
           <div className="text-center mb-8 sm:mb-12">
             <h3 className="text-2xl sm:text-3xl font-bold mb-4">
               Why Choose This Template?
@@ -263,6 +264,9 @@ export const LandingPage = ({
             </Card>
           </div>
         </div>
+
+        {/* Professional Footer */}
+        <Footer className="mt-12 sm:mt-16 lg:mt-20" />
       </div>
     </div>
   );

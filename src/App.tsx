@@ -24,6 +24,7 @@ import { Button } from './components/ui/button'
 import { ThemeProvider } from './components/theme/provider'
 import { NavBar } from './components/layout/NavBar'
 import { LandingPage } from './components/layout/LandingPage'
+import { Footer } from './components/layout/Footer'
 import { ItemGrid } from './components/features/ItemGrid'
 import { sampleItems, getPopularItems, getFeaturedItems } from './data/sampleItems'
 import { BaseItem, BaseFlowData } from './types/base'
@@ -159,6 +160,9 @@ function App() {
                   onFlowComplete={handleFlowComplete}
                 />
               </div>
+              
+              {/* Footer for example page */}
+              <Footer showAllSections={false} className="mt-12" />
             </div>
           )}
         </main>

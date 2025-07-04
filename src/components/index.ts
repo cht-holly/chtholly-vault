@@ -7,6 +7,7 @@ export { NavBar } from './layout/NavBar';
 export { Logo } from './layout/Logo';
 export { NavMenu } from './layout/NavMenu';
 export { UserNav } from './layout/UserNav';
+export { Footer } from './layout/Footer';
 export { ThemeProvider, useTheme } from './theme/provider';
 export { ThemeToggle } from './theme/toggle';
 

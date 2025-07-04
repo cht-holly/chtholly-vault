@@ -4,6 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "description": "AI Agent-Friendly React TypeScript template with comprehensive documentation, shadcn/ui, Tailwind CSS, and Zustand. Designed for rapid development across any industry.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cht-holly/chtholly-ui.git"
+  },
+  "homepage": "https://github.com/cht-holly/chtholly-ui",
+  "bugs": {
+    "url": "https://github.com/cht-holly/chtholly-ui/issues"
+  },
   "keywords": [
     "react",
     "typescript",
