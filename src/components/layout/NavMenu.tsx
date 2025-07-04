@@ -68,26 +68,6 @@ const examples: { title: string; href: string; description: string; onClick?: ()
       window.dispatchEvent(new CustomEvent('navigate-to-example', { detail: 'photos' }))
     }
   },
-  {
-    title: "E-commerce",
-    href: "/examples/ecommerce",
-    description: "Product catalog with shopping cart, filters, and checkout flow components.",
-  },
-  {
-    title: "Healthcare Portal",
-    href: "/examples/healthcare",
-    description: "Patient portal with appointment booking, medical records, and telemedicine features.",
-  },
-  {
-    title: "Education Platform",
-    href: "/examples/education",
-    description: "Learning management system with course catalog, progress tracking, and assignments.",
-  },
-  {
-    title: "Finance Dashboard",
-    href: "/examples/finance",
-    description: "Investment portfolio tracking with market analysis, charts, and financial planning tools.",
-  },
 ]
 
 interface NavMenuProps {

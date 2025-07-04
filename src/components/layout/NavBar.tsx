@@ -78,7 +78,7 @@ export const NavBar = ({
   onLogout
 }: NavBarProps) => {
   return (
-    <nav className="flex items-center justify-between px-2 sm:px-4 py-2 bg-background border-b border-border">
+    <nav className="flex items-center justify-between px-2 sm:px-4 py-2 bg-background border-b border-border relative z-[100]">
       <div className="flex h-12 sm:h-16 items-center">
         <a className="flex h-12 sm:h-16 items-center cursor-pointer" href="/">
           <Logo brandName={brandName} tagline={brandTagline} />
