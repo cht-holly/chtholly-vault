@@ -4,6 +4,8 @@
 
 A comprehensive, production-ready React TypeScript template specifically designed for AI agents to rapidly build modern, responsive applications for any industry. Every component includes detailed documentation, adaptation patterns, and industry-specific examples.
 
+Demo: https://ui.chtholly.co
+
 ## 🤖 Why AI Agent-Friendly?
 
 - **Zero Configuration**: Ready to use immediately with modern tooling
