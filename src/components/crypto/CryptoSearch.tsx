@@ -6,10 +6,8 @@
  */
 
 import { useState, useEffect, useRef } from 'react'
-import { Search, TrendingUp, Plus, X } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Search, TrendingUp, Plus } from 'lucide-react'
 import { Input } from '../ui/input'
-import { Card, CardContent } from '../ui/card'
 import { Badge } from '../ui/badge'
 import { CryptoListItem } from '../../types/crypto'
 import { coinGeckoApi } from '../../services/coinGeckoApi'
@@ -169,17 +167,7 @@ export function CryptoSearch({
   const displayResults = query.trim().length >= 2 ? results : popularCryptos
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardContent className="p-6">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Add Cryptocurrency</h3>
-          {onClose && (
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              <X className="h-4 w-4" />
-            </Button>
-          )}
-        </div>
+    <div className="w-full space-y-4">
 
         {/* Search Input */}
         <div className="relative mb-4">
@@ -279,7 +267,6 @@ export function CryptoSearch({
         <div className="mt-4 pt-4 border-t text-xs text-muted-foreground">
           <p>Use ↑↓ arrow keys to navigate, Enter to select, Esc to close</p>
         </div>
-      </CardContent>
-    </Card>
+    </div>
   )
 }
