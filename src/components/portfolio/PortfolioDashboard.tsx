@@ -8,6 +8,13 @@ import { useState, useEffect } from 'react'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Badge } from '../ui/badge'
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator
+} from '../ui/dropdown-menu'
 import { usePortfolioStore } from '../../stores/portfolioStore'
 import { AddAssetDialog } from '../crypto/AddAssetDialog'
 import { EditAssetDialog } from '../crypto/EditAssetDialog'
@@ -22,13 +29,13 @@ import {
   AlertCircle,
   Clock,
   Edit,
-  BarChart3,
   ArrowUp,
   ArrowDown,
   Eye,
   EyeOff,
   Download,
-  Upload
+  Upload,
+  MoreVertical
 } from 'lucide-react'
 import { formatCurrency, formatPercentage, formatDate } from '../../utils/formatters'
 import { Footer } from '../layout/Footer'
@@ -193,7 +200,9 @@ export function PortfolioDashboard() {
               Add your first cryptocurrency to begin tracking your portfolio's performance 
               with real-time prices and analytics.
             </p>
-            <div className="flex gap-4 justify-center">
+            
+            {/* Desktop Empty State Actions */}
+            <div className="hidden lg:flex gap-4 justify-center">
               <Button onClick={() => setAddAssetOpen(true)} size="lg">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Your First Asset
@@ -203,7 +212,30 @@ export function PortfolioDashboard() {
                 Import Holdings
               </Button>
             </div>
+            
+            {/* Mobile Empty State Actions */}
+            <div className="lg:hidden space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Tap "Add Asset" below to get started
+              </p>
+              <Button onClick={handleImportHoldings} variant="outline" size="lg" className="w-full max-w-xs">
+                <Upload className="h-4 w-4 mr-2" />
+                Or Import Holdings
+              </Button>
+            </div>
           </div>
+        </div>
+        
+        {/* Mobile FAB for Empty State */}
+        <div className="lg:hidden fixed bottom-6 right-4 z-50">
+          <Button
+            onClick={() => setAddAssetOpen(true)}
+            size="lg"
+            className="flex items-center gap-2 px-4 py-3 h-auto rounded-full shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+          >
+            <Plus className="h-5 w-5" />
+            <span className="font-medium text-sm">Add Asset</span>
+          </Button>
         </div>
         
         <AddAssetDialog 
@@ -217,8 +249,8 @@ export function PortfolioDashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+        {/* Desktop Header - unchanged */}
+        <div className="hidden lg:flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">Portfolio Dashboard</h1>
             <p className="text-muted-foreground">
@@ -266,6 +298,75 @@ export function PortfolioDashboard() {
               <Plus className="h-4 w-4 mr-2" />
               Add Asset
             </Button>
+          </div>
+        </div>
+
+        {/* Mobile Header - Clean & Minimal */}
+        <div className="lg:hidden">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold">Portfolio</h1>
+              <p className="text-sm text-muted-foreground">
+                Track your crypto investments
+              </p>
+            </div>
+            
+            {/* Mobile Action Bar */}
+            <div className="flex items-center gap-2">
+              {/* Quick Refresh */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleRefresh}
+                disabled={isLoading}
+                className="h-9 w-9 p-0"
+                aria-label={isLoading ? 'Refreshing prices...' : 'Refresh prices'}
+              >
+                <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+              </Button>
+              
+              {/* Smart Actions Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="h-9 w-9 p-0">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem onClick={() => setAddAssetOpen(true)}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Asset
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleToggleHideValues}>
+                    {settings.hideValues ? (
+                      <>
+                        <Eye className="h-4 w-4 mr-2" />
+                        Show Values
+                      </>
+                    ) : (
+                      <>
+                        <EyeOff className="h-4 w-4 mr-2" />
+                        Hide Values
+                      </>
+                    )}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleImportHoldings}>
+                    <Upload className="h-4 w-4 mr-2" />
+                    Import Holdings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={handleExportHoldings}
+                    disabled={isEmpty}
+                    className={isEmpty ? 'opacity-50' : ''}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Export Holdings
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </div>
 
@@ -460,23 +561,78 @@ export function PortfolioDashboard() {
                 return (
                   <div
                     key={asset.id}
-                    className="grid grid-cols-12 items-center p-4 border rounded-lg hover:bg-muted/50 transition-colors group"
+                    className="flex flex-col sm:grid sm:grid-cols-12 sm:items-center p-4 border rounded-lg hover:bg-muted/50 transition-colors group gap-3 sm:gap-0"
                   >
-                    {/* Asset Info - 6 columns */}
-                    <div className="col-span-6 flex items-center gap-4">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium truncate">{asset.name}</span>
+                    {/* Mobile Layout - Stack vertically */}
+                    <div className="sm:hidden space-y-3">
+                      {/* Asset Info */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{asset.name}</span>
                           <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
                         </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleEditAsset(asset)}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      
+                      {/* Quantity and Value */}
+                      <div className="flex items-center justify-between">
                         <div className="text-sm text-muted-foreground">
                           {asset.quantity} {asset.symbol}
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">
+                            {formatHiddenValue(formatCurrency(currentValue, settings.currency))}
+                          </div>
+                          {priceChange !== 0 && (
+                            <div className="flex items-center justify-end gap-1 text-xs">
+                              {priceChange >= 0 ? (
+                                <TrendingUp className="h-3 w-3 text-green-600" />
+                              ) : (
+                                <TrendingDown className="h-3 w-3 text-red-600" />
+                              )}
+                              <span className={`font-medium ${
+                                priceChange >= 0 ? 'text-green-600' : 'text-red-600'
+                              }`}>
+                                {formatPercentage(priceChange)}
+                              </span>
+                            </div>
+                          )}
+                          {profitLoss !== null && (
+                            <div className={`text-xs ${
+                              profitLoss >= 0 ? 'text-green-600' : 'text-red-600'
+                            }`}>
+                              P&L: {formatHiddenValue(formatCurrency(profitLoss, settings.currency))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop Layout - Grid */}
+                    {/* Asset Info - 6 columns */}
+                    <div className="hidden sm:block sm:col-span-6">
+                      <div className="flex items-center gap-4">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-medium truncate">{asset.name}</span>
+                            <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {asset.quantity} {asset.symbol}
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Price & Change - 5 columns */}
-                    <div className="col-span-5 text-right">
+                    <div className="hidden sm:block sm:col-span-5 sm:text-right">
                       <div className="font-medium">
                         {formatHiddenValue(formatCurrency(currentValue, settings.currency))}
                       </div>
@@ -506,7 +662,7 @@ export function PortfolioDashboard() {
                     </div>
 
                     {/* Actions - 1 column */}
-                    <div className="col-span-1 flex justify-end">
+                    <div className="hidden sm:flex sm:col-span-1 sm:justify-end">
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                         <Button
                           variant="ghost"
@@ -523,6 +679,18 @@ export function PortfolioDashboard() {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Mobile Floating Action Button - Primary Action */}
+      <div className="lg:hidden fixed bottom-6 right-4 z-50">
+        <Button
+          onClick={() => setAddAssetOpen(true)}
+          size="lg"
+          className="flex items-center gap-2 px-4 py-3 h-auto rounded-full shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+        >
+          <Plus className="h-5 w-5" />
+          <span className="font-medium text-sm">Add Asset</span>
+        </Button>
       </div>
 
       <AddAssetDialog 

@@ -9,7 +9,6 @@ import { Shield, Eye, Lock, Zap, TrendingUp, BarChart3 } from "lucide-react";
 import { Footer } from "./Footer";
 
 interface LandingPageProps {
-  heading?: string;
   subheading?: string;
   subtitle?: string;
   ctaText?: string;
@@ -25,7 +24,6 @@ interface LandingPageProps {
 }
 
 export const LandingPage = ({
-  heading = "Privacy-First Crypto Portfolio Tracking",
   subheading = "Your Data Stays Yours",
   subtitle = "Spreading your crypto across multiple wallets keeps you secure, but makes tracking total value nearly impossible. Get a consolidated view of your entire portfolio while keeping your data completely private.",
   ctaText = "Start Tracking",
@@ -68,23 +66,49 @@ export const LandingPage = ({
 }: LandingPageProps) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[500px] xs:min-h-[600px] lg:min-h-[700px] overflow-hidden">
-      <div className="flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 pt-4 sm:pt-8 lg:pt-12 max-w-7xl mx-auto px-2 sm:px-4 w-full">
-        {/* Main Heading */}
-        <div className="text-center space-y-3 sm:space-y-4 lg:space-y-6 w-full">
-          <h1 className="text-2xl sm:text-3xl xs:text-5xl lg:text-6xl leading-tight font-extrabold flex flex-col items-center text-center">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
-              Privacy-First Crypto
-            </span>
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
-              Portfolio Tracking
-            </span>
-            <span className="text-gray-800 dark:text-gray-100 text-lg sm:text-2xl xs:text-3xl lg:text-3xl font-bold mt-2 sm:mt-3">
+      <div className="flex flex-col items-center gap-6 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 lg:pt-12 max-w-7xl mx-auto px-4 sm:px-4 w-full">
+        {/* Hero Section - Same Content, Mobile-Optimized Layout */}
+        <div className="text-center space-y-4 sm:space-y-4 lg:space-y-6 w-full">
+          {/* Mobile: Restructured Headline - Same Content */}
+          <div className="lg:hidden">
+            <h1 className="text-3xl font-extrabold leading-tight mb-2">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
+                Privacy-First Crypto
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
+                Portfolio Tracking
+              </span>
+            </h1>
+            <p className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">
               {subheading}
-            </span>
-          </h1>
+            </p>
+          </div>
+
+          {/* Desktop: Original Headline */}
+          <div className="hidden lg:block">
+            <h1 className="text-2xl sm:text-3xl xs:text-5xl lg:text-6xl leading-tight font-extrabold flex flex-col items-center text-center">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
+                Privacy-First Crypto
+              </span>
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 bg-clip-text text-transparent">
+                Portfolio Tracking
+              </span>
+              <span className="text-gray-800 dark:text-gray-100 text-lg sm:text-2xl xs:text-3xl lg:text-3xl font-bold mt-2 sm:mt-3">
+                {subheading}
+              </span>
+            </h1>
+          </div>
           
-          {/* Subtitle */}
-          <div className="font-medium text-center text-sm sm:text-lg xs:text-xl max-w-[300px] sm:max-w-[500px] lg:max-w-[700px] text-gray-600 dark:text-gray-300 leading-relaxed mb-4 sm:mb-6 mx-auto">
+          {/* Mobile: Same Subtitle, Better Mobile Typography */}
+          <div className="lg:hidden">
+            <div className="font-medium text-center text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-w-[350px] mx-auto">
+              {subtitle}
+            </div>
+          </div>
+
+          {/* Desktop: Original Subtitle */}
+          <div className="hidden lg:block font-medium text-center text-sm sm:text-lg xs:text-xl max-w-[300px] sm:max-w-[500px] lg:max-w-[700px] text-gray-600 dark:text-gray-300 leading-relaxed mb-4 sm:mb-6 mx-auto">
             {subtitle}
           </div>
 
@@ -101,16 +125,62 @@ export const LandingPage = ({
           </Button>
         </div>
 
-        {/* Features Section */}
-        <div className="w-full max-w-5xl mx-auto mt-2 sm:mt-3 lg:mt-4">
-          {/* Simple tagline */}
+        {/* Features Section - Same Content, Mobile-Optimized Layout */}
+        <div className="w-full max-w-5xl mx-auto mt-6 lg:mt-4">
+          {/* Same tagline for all devices */}
           <div className="text-center mb-4 sm:mb-6">
             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium px-2">
               Built for crypto investors who value privacy and security
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0">
+          {/* Mobile: Stacked Layout - Same Content */}
+          <div className="lg:hidden space-y-6">
+            {/* Challenge Card - Mobile Layout */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-5 border border-amber-200 dark:border-amber-800/30">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="w-6 h-6 text-amber-600 flex-shrink-0" />
+                <h3 className="text-lg font-bold text-amber-800 dark:text-amber-200">
+                  {primaryFeatureTitle}
+                </h3>
+              </div>
+              <ul className="space-y-3 text-sm text-amber-700 dark:text-amber-300">
+                {features.slice(0, 3).map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="mt-1">{feature.icon}</div>
+                    <div>
+                      <div className="font-medium text-amber-800 dark:text-amber-200 mb-1">{feature.title}</div>
+                      <div className="text-amber-600 dark:text-amber-400 leading-relaxed">{feature.description}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Solution Card - Mobile Layout */}
+            <div className="bg-gradient-to-br from-blue-50 to-emerald-50 dark:from-blue-900/20 dark:to-emerald-900/20 rounded-xl p-5 border border-blue-200 dark:border-blue-800/30">
+              <div className="flex items-center gap-3 mb-4">
+                <TrendingUp className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                <h3 className="text-lg font-bold text-blue-800 dark:text-blue-200">
+                  {secondaryFeatureTitle}
+                </h3>
+              </div>
+              <ul className="space-y-3 text-sm text-blue-700 dark:text-blue-300">
+                {features.slice(3).map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="mt-1">{feature.icon}</div>
+                    <div>
+                      <div className="font-medium text-blue-800 dark:text-blue-200 mb-1">{feature.title}</div>
+                      <div className="text-blue-600 dark:text-blue-400 leading-relaxed">{feature.description}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Desktop: Original Side-by-Side Layout */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0">
             {/* Challenge Card */}
             <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-amber-200 dark:border-amber-800/30">
               <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">

@@ -10,7 +10,6 @@ import { Logo } from "./Logo";
 import { Settings } from "lucide-react";
 
 interface NavBarProps {
-  brandName?: string;
   brandTagline?: string;
   onPrimaryAction?: () => void;
   primaryButtonText?: string;
@@ -21,7 +20,6 @@ interface NavBarProps {
 }
 
 export const NavBar = ({
-  brandName = "Chtholly Vault",
   brandTagline = "Privacy-First Portfolio Tracking",
   onPrimaryAction,
   primaryButtonText,
@@ -34,7 +32,6 @@ export const NavBar = ({
     <nav className="flex items-center justify-between px-2 sm:px-4 py-2 bg-background border-b border-border relative z-[100]">
       <div className="flex h-12 sm:h-16 items-center">
         <Logo 
-          brandName={brandName} 
           tagline={brandTagline} 
           onClick={onLogoClick}
         />

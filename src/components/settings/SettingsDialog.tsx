@@ -63,23 +63,24 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg max-h-[80vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-lg max-h-[95vh] sm:max-h-[90vh] flex flex-col p-0">
+        <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Settings className="h-5 w-5" />
             Settings
           </DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Currency Selection */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Display Currency</Label>
-            <div className="grid grid-cols-3 gap-2">
-              {currencyOptions.map((option) => (
-                <label
-                  key={option.value}
-                  className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+        <div className="flex-1 overflow-y-auto px-6">
+          <form onSubmit={handleSubmit} className="space-y-6 pb-6">
+            {/* Currency Selection */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">Display Currency</Label>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {currencyOptions.map((option) => (
+                  <label
+                    key={option.value}
+                    className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
                 >
                   <input
                     type="radio"
@@ -103,14 +104,14 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             </div>
           </div>
 
-          {/* Refresh Interval */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Refresh Interval</Label>
-            <div className="grid grid-cols-3 gap-2">
-              {refreshIntervalOptions.map((option) => (
-                <label
-                  key={option.value}
-                  className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+            {/* Refresh Interval */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">Refresh Interval</Label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {refreshIntervalOptions.map((option) => (
+                  <label
+                    key={option.value}
+                    className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
                 >
                   <input
                     type="radio"
@@ -133,10 +134,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             </div>
           </div>
 
-          {/* Auto Refresh Toggle */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Auto Refresh</Label>
-            <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+            {/* Auto Refresh Toggle */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">Auto Refresh</Label>
+              <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
               <div>
                 <div className="font-medium text-sm">Enable automatic updates</div>
                 <div className="text-xs text-muted-foreground">
@@ -157,10 +158,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             </label>
           </div>
 
-          {/* Hide Values Toggle */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">Privacy</Label>
-            <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+            {/* Hide Values Toggle */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">Privacy</Label>
+              <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
               <div>
                 <div className="font-medium text-sm">Hide portfolio values</div>
                 <div className="text-xs text-muted-foreground">
@@ -181,35 +182,36 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             </label>
           </div>
 
-          {/* Actions */}
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleCancel}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button 
-              type="submit" 
-              disabled={isSubmitting}
-              className="flex-1"
-            >
-              {isSubmitting ? (
-                <div className="flex items-center gap-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  Saving...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Save className="h-4 w-4" />
-                  Save
-                </div>
-              )}
-            </Button>
-          </div>
-        </form>
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleCancel}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="flex-1"
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    Saving...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Save className="h-4 w-4" />
+                    Save
+                  </div>
+                )}
+              </Button>
+            </div>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   )

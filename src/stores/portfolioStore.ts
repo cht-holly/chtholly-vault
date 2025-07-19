@@ -18,7 +18,7 @@ import {
   PortfolioAnalytics
 } from '../types/crypto'
 import { coinGeckoApi } from '../services/coinGeckoApi'
-import { exchangeRateApi, ExchangeRate } from '../services/exchangeRateApi'
+import { ExchangeRate } from '../services/exchangeRateApi'
 
 interface PortfolioState {
   // Holdings data (persistent)
@@ -597,14 +597,17 @@ export const usePortfolioStore = create<PortfolioState>()(
   )
 )
 
-// Auto-start refresh when store is hydrated
+// Auto-start refresh when store is hydrated - only listen to autoRefresh setting changes
+let previousAutoRefresh: boolean | undefined = undefined
 usePortfolioStore.subscribe(
-  (state) => state.settings.autoRefresh,
-  (autoRefresh) => {
-    if (autoRefresh) {
-      usePortfolioStore.getState().startAutoRefresh()
-    } else {
-      usePortfolioStore.getState().stopAutoRefresh()
+  (state) => {
+    if (previousAutoRefresh !== state.settings.autoRefresh) {
+      previousAutoRefresh = state.settings.autoRefresh
+      if (state.settings.autoRefresh) {
+        state.startAutoRefresh()
+      } else {
+        state.stopAutoRefresh()
+      }
     }
   }
 )

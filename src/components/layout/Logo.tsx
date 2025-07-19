@@ -7,14 +7,12 @@
 import { TrendingUp } from "lucide-react";
 
 interface LogoProps {
-  brandName?: string;
   tagline?: string;
   className?: string;
   onClick?: () => void;
 }
 
 export const Logo = ({ 
-  brandName = "Chtholly Vault", 
   tagline = "Privacy-First Portfolio Tracking",
   className = "",
   onClick

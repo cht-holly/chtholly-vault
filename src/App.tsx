@@ -41,7 +41,6 @@ function App() {
       <div className="min-h-screen bg-background text-foreground">
         {/* Navigation Bar */}
         <NavBar
-          brandName="Chtholly Vault"
           brandTagline="Privacy-First Portfolio Tracking"
           onPrimaryAction={currentView === 'landing' ? handleGetStarted : undefined}
           primaryButtonText={currentView === 'landing' ? "Get Started" : undefined}
@@ -55,7 +54,6 @@ function App() {
         <main>
           {currentView === 'landing' ? (
             <LandingPage
-              heading="Privacy-First Crypto Portfolio Tracking"
               subheading="Your Data Stays Yours"
               subtitle="Track your entire crypto portfolio in one place. Complete privacy guaranteed."
               ctaText="Start Tracking"
