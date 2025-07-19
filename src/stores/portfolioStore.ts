@@ -381,9 +381,13 @@ export const usePortfolioStore = create<PortfolioState>()(
 
           set({ 
             priceData: { ...get().priceData, ...updatedPriceData },
-            isLoading: false,
             lastRefresh: new Date()
           })
+
+          // Brief loading state for user feedback, even with cached data
+          setTimeout(() => {
+            set({ isLoading: false })
+          }, 500)
 
           // Combine holdings with prices
           get().combineHoldingsWithPrices()

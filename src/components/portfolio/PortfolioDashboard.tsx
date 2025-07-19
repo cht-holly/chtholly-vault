@@ -292,7 +292,7 @@ export function PortfolioDashboard() {
               aria-label={isLoading ? 'Refreshing prices...' : 'Refresh prices'}
               title={isLoading ? 'Refreshing prices...' : 'Refresh prices'}
             >
-              <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin text-blue-600' : ''}`} />
             </Button>
             <Button onClick={() => setAddAssetOpen(true)} size="sm">
               <Plus className="h-4 w-4 mr-2" />
@@ -322,7 +322,7 @@ export function PortfolioDashboard() {
                 className="h-9 w-9 p-0"
                 aria-label={isLoading ? 'Refreshing prices...' : 'Refresh prices'}
               >
-                <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin text-blue-600' : ''}`} />
               </Button>
               
               {/* Smart Actions Menu */}
@@ -644,7 +644,7 @@ export function PortfolioDashboard() {
                       {/* Quantity and Value */}
                       <div className="flex items-center justify-between">
                         <div className="text-sm text-muted-foreground">
-                          {asset.quantity} {asset.symbol}
+                          {formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}
                         </div>
                         <div className="text-right">
                           <div className="font-medium">
@@ -702,7 +702,7 @@ export function PortfolioDashboard() {
                             <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            {asset.quantity} {asset.symbol}
+                            {formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}
                           </div>
                         </div>
                       </div>
