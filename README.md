@@ -1,279 +1,167 @@
-# Chtholly UI
+# Chtholly Vault
 
-**AI Agent-Friendly React TypeScript Template**
+**Privacy-First Cryptocurrency Portfolio Tracking**
 
-A comprehensive, production-ready React TypeScript template specifically designed for AI agents to rapidly build modern, responsive applications for any industry. Every component includes detailed documentation, adaptation patterns, and industry-specific examples.
+🔗 **Live Demo**: [vault.chtholly.co](https://vault.chtholly.co)
 
-Demo: https://ui.chtholly.co
+---
 
-## 🤖 Why AI Agent-Friendly?
+## Why We Built This
 
-- **Zero Configuration**: Ready to use immediately with modern tooling
-- **Comprehensive Documentation**: Every component has detailed AI agent instructions
-- **Industry-Agnostic**: Generic components that adapt to any business domain
-- **Quick Reference**: `AI_AGENT_CONFIG.json` provides instant component overview
-- **Adaptation Patterns**: Clear examples for common industry transformations
-- **Type Safety**: Full TypeScript support with comprehensive interfaces
+Smart crypto holders spread their assets across multiple wallets for security - hardware wallets, exchanges, DeFi protocols, and cold storage. But this creates a massive problem: **how do you track your total portfolio value?**
 
-## 🚀 Features
+Most solutions require you to connect wallets or share personal data. That's a privacy nightmare and security risk we're not willing to take.
 
-- **Modern Stack**: React 18, TypeScript, Vite
-- **UI Components**: 50+ shadcn/ui components with Radix UI primitives
-- **Styling**: Tailwind CSS with responsive, mobile-first design
-- **State Management**: Zustand for simple, scalable state
-- **Animations**: Framer Motion for smooth interactions
-- **Theme Support**: Light/Dark/System theme with persistence
-- **Form Handling**: React Hook Form with Zod validation
-- **Mobile Optimized**: Touch-friendly, responsive design
-- **Agent Documentation**: Comprehensive guides and quick reference
+**Chtholly Vault solves this by letting you track everything locally on your device. No wallet connections, no personal data, no compromises.**
 
-## 🧠 AI Agent Capabilities
+---
 
-This template empowers AI agents to:
+## What It Does
 
-### 🔍 **Instant Component Discovery**
-- `AI_AGENT_CONFIG.json` - Quick reference of all 50+ components
-- Component location mapping and usage patterns
-- Industry adaptation examples for each component
+### ✅ Complete Privacy
+- **Local storage only** - all data stays on your device
+- **No wallet addresses required** - just add your holdings manually
+- **Zero tracking** - no analytics, cookies, or data collection
+- **No backend servers** - client-side only application
 
-### 📚 **Comprehensive Documentation**
-- Every component includes detailed agent instructions
-- Clear adaptation patterns for different industries
-- TypeScript interfaces with full type definitions
-- Usage examples and best practices
+### ✅ Real-Time Portfolio Tracking
+- **Live cryptocurrency prices** from CoinGecko API
+- **Multi-currency support** - view in USD, SGD, or MYR
+- **Portfolio analytics** - track performance, profit/loss, and market changes
+- **Consolidated view** - see your total value across all wallets
 
-### ⚡ **Rapid Development**
-- Generic `BaseItem` and `BaseFlowData` types for any industry
-- Pre-built responsive layouts and navigation
-- Form handling with validation patterns
-- State management patterns with Zustand
+### ✅ Smart Features
+- **Easy data management** - export/import your holdings
+- **Customizable refresh rates** - control how often prices update
+- **Clean, modern interface** - built for crypto investors
+- **Mobile responsive** - track on any device
 
-### 🎨 **Easy Customization**
-- Theme system with CSS variables
-- Tailwind CSS classes for rapid styling
-- Component variants and customization props
-- Brand-ready with logo and color scheme support
+---
 
-### 🏢 **Industry Templates**
-- E-commerce: Product catalogs, shopping carts, checkout flows
-- Healthcare: Patient portals, appointment booking, medical records
-- Education: Course catalogs, enrollment, progress tracking
-- SaaS: Feature showcases, subscription management, dashboards
+## How It Works
 
-## 🎯 Industry Adaptation Examples
+1. **Add Your Holdings** - Manually input your cryptocurrency holdings (coin + quantity)
+2. **Get Live Prices** - Automatic price updates from CoinGecko API
+3. **Track Performance** - See your total portfolio value and individual asset performance
+4. **Stay Private** - Everything stored locally, nothing leaves your device
 
-This template is designed to be easily adapted for any industry:
+No wallet connections. No personal data. Just clean, private portfolio tracking.
 
-### E-commerce
-```tsx
-// Adapt ItemGrid for products
-<ItemGrid 
-  items={products} 
-  title="Featured Products"
-  onItemSelect={openProductDetails}
-  onFlowComplete={addToCart}
-/>
+---
+
+## Tech Stack
+
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **State Management**: Zustand with persistence
+- **Data Sources**: CoinGecko API for crypto prices, fixed exchange rates for currency conversion
+- **Privacy**: 100% client-side, no backend required
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/cht-holly/chtholly-vault.git
+cd chtholly-vault
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-### Healthcare
-```tsx
-// Adapt LoginForm for patient portal
-<LoginForm 
-  title="Patient Portal"
-  description="Access your medical records securely"
-  showSocialLogin={false}
-  onSubmit={handlePatientLogin}
-/>
-```
+### Environment Setup
 
-### Education
-```tsx
-// Adapt ItemGrid for courses
-<ItemGrid 
-  items={courses} 
-  title="Available Courses"
-  onItemSelect={openCourseDetails}
-  onFlowComplete={enrollInCourse}
-/>
-```
+No environment variables needed! The app works entirely client-side.
 
-## Quick Start
+---
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+## Future Plans
 
-2. **Start development server**:
-   ```bash
-   npm run dev
-   ```
+### 🚀 Planned Features
+- **Historical charts** - visualize portfolio performance over time
+- **Advanced analytics** - more detailed performance metrics
+- **Additional currencies** - EUR, GBP, and other major currencies
+- **Price alerts** - notifications for significant price movements
+- **DeFi protocol integration** - better tracking for staking and liquidity positions
 
-3. **Build for production**:
-   ```bash
-   npm run build
-   ```
+### 🎯 Long-term Vision
+- **Hardware wallet integration** (read-only, privacy-preserving)
+- **Portfolio sharing** (encrypted, optional)
+- **Advanced privacy features** (local encryption, secure backup)
+- **Mobile app** (React Native)
 
-## 🏗️ Project Structure
-
-```
-src/
-├── components/
-│   ├── auth/              # Authentication components
-│   │   └── LoginForm.tsx  # Generic login form
-│   ├── features/          # Feature-specific components
-│   │   ├── ItemGrid.tsx   # Responsive grid layout
-│   │   └── wizard/        # Multi-step wizard flow
-│   ├── layout/            # Layout components
-│   │   ├── LandingPage.tsx # Hero section
-│   │   ├── Logo.tsx       # Brand logo
-│   │   ├── NavBar.tsx     # Navigation bar
-│   │   ├── NavMenu.tsx    # Desktop navigation
-│   │   └── UserNav.tsx    # User profile menu
-│   ├── theme/             # Theme management
-│   │   ├── provider.tsx   # Theme context
-│   │   └── toggle.tsx     # Theme toggle button
-│   └── ui/                # Reusable UI primitives
-├── data/                  # Sample data and utilities
-├── hooks/                 # Custom React hooks
-├── lib/                   # Utility functions
-├── types/                 # TypeScript type definitions
-└── App.tsx               # Main application component
-```
-
-## 📱 Mobile-First Design
-
-Every component is built with mobile-first principles:
-
-- **Responsive Grids**: Adapts from single column (mobile) to multi-column (desktop)
-- **Touch Targets**: Minimum 44px touch targets for mobile usability
-- **Flexible Typography**: Responsive text sizing with proper line heights
-- **Gesture Support**: Swipe navigation and touch interactions
-- **Performance**: Optimized for mobile networks and devices
-
-## 🎨 Component Documentation
-
-### Core Components
-
-#### ItemGrid
-A responsive grid layout for displaying items with selection and flow capabilities.
-
-```tsx
-<ItemGrid 
-  items={sampleItems}
-  title="Featured Items"
-  onItemSelect={(item) => console.log('Selected:', item)}
-  onFlowComplete={(item, flow) => console.log('Completed:', item, flow)}
-/>
-```
-
-#### PersonalizationWizard
-A multi-step wizard component for complex flows.
-
-```tsx
-<PersonalizationWizard
-  item={selectedItem}
-  onComplete={handleWizardComplete}
-  onClose={handleWizardClose}
-/>
-```
-
-#### LoginForm
-A complete authentication form with social login support.
-
-```tsx
-<LoginForm 
-  onSubmit={(email, password) => handleLogin(email, password)}
-  onSocialLogin={(provider) => handleSocialLogin(provider)}
-  showSocialLogin={true}
-  showEmailLogin={true}
-/>
-```
-
-### Layout Components
-
-#### LandingPage
-A hero section with call-to-action and feature highlights.
-
-#### NavBar
-A responsive navigation bar with mobile menu support.
-
-#### Logo
-A scalable brand logo component.
-
-### Theme Components
-
-#### ThemeProvider
-Provides theme context to the entire application.
-
-```tsx
-<ThemeProvider defaultTheme="system" storageKey="your-app-theme">
-  <App />
-</ThemeProvider>
-```
-
-#### ThemeToggle
-A button to toggle between light, dark, and system themes.
-
-## For LLM Agents
-
-This template is designed to be easily understood and adapted by LLM agents. Each component includes comprehensive documentation with:
-
-- **Purpose and usage patterns**
-- **Industry adaptation guidelines**
-- **Mobile-first responsive behavior**
-- **Accessibility requirements**
-- **CSS classes to maintain**
-
-See the `docs/` folder for detailed agent instructions.
-
-## Design System
-
-The template uses a consistent design system with:
-
-- **Colors**: Purple/indigo gradient theme with CSS variables
-- **Typography**: Responsive text scaling (mobile-first)
-- **Spacing**: Consistent padding and margins
-- **Components**: Reusable UI components with variants
-- **Animations**: Smooth transitions and hover effects
-
-## Mobile-First Approach
-
-All components are designed mobile-first with:
-
-- **Touch targets**: Minimum 44px for interactive elements
-- **Responsive breakpoints**: sm (640px), lg (1024px)
-- **Flexible layouts**: Grid and flex patterns that adapt
-- **Performance**: Optimized for mobile networks
-
-## Customization
-
-### Colors
-Modify CSS variables in `src/index.css`:
-```css
-:root {
-  --primary: 221.2 83.2% 53.3%;
-  --secondary: 210 40% 96.1%;
-  /* ... */
-}
-```
-
-### Components
-Each component is documented with adaptation instructions for different industries:
-
-- **E-commerce**: Product cards, shopping carts, checkout flows
-- **Photography**: Gallery grids, booking forms, portfolio layouts
-- **Social Media**: Post cards, user profiles, activity feeds
-
-## License
-
-MIT License - feel free to use this template for any project.
+---
 
 ## Contributing
 
-This template is designed to be stable and well-documented. Contributions should focus on:
+We welcome contributions! Here's how you can help:
 
-- Improving agent documentation
-- Adding new industry adaptation examples
-- Enhancing mobile-first patterns
-- Maintaining accessibility standards
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+### Development Guidelines
+- Follow TypeScript best practices
+- Maintain 100% client-side architecture
+- Prioritize user privacy in all features
+- Write clean, documented code
+- Test thoroughly before submitting
+
+---
+
+## Security & Privacy
+
+**Privacy is our top priority:**
+
+- ✅ **No data collection** - we don't store anything
+- ✅ **No tracking** - no analytics or user monitoring  
+- ✅ **No wallet connections** - never ask for wallet access
+- ✅ **Local storage only** - your data never leaves your device
+- ✅ **Open source** - full transparency in our code
+
+**Security considerations:**
+- All price data comes from reputable APIs (CoinGecko)
+- No external scripts or tracking pixels
+- Built with modern security practices
+- Regular dependency updates
+
+---
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/cht-holly/chtholly-vault/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/cht-holly/chtholly-vault/discussions)
+- **Website**: [vault.chtholly.co](https://vault.chtholly.co)
+
+---
+
+## Acknowledgments
+
+- **Built with** [Chtholly UI](https://chtholly.co) - React component library
+- **Price data** from [CoinGecko API](https://coingecko.com)
+- **Icons** from [Lucide](https://lucide.dev)
+
+---
+
+*Made with ❤️ for the crypto community. Keep your coins secure, keep your data private.*
