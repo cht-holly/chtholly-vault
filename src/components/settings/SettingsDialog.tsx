@@ -48,9 +48,9 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   }
 
   const currencyOptions = [
-    { value: 'USD', label: 'US Dollar (USD)', symbol: '$' },
-    { value: 'SGD', label: 'Singapore Dollar (SGD)', symbol: 'S$' },
-    { value: 'MYR', label: 'Malaysian Ringgit (MYR)', symbol: 'RM' }
+    { value: 'USD', label: 'US Dollar (USD)', symbol: '$', flag: '🇺🇸' },
+    { value: 'SGD', label: 'Singapore Dollar (SGD)', symbol: 'S$', flag: '🇸🇬' },
+    { value: 'MYR', label: 'Malaysian Ringgit (MYR)', symbol: 'RM', flag: '🇲🇾' }
   ]
 
   const refreshIntervalOptions = [
@@ -96,8 +96,10 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                     className="w-4 h-4"
                   />
                   <div className="text-center">
-                    <div className="font-medium text-sm">{option.value}</div>
-                    <div className="text-xs text-muted-foreground">{option.symbol}</div>
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="text-lg">{option.flag}</span>
+                      <div className="font-medium text-sm">{option.value}</div>
+                    </div>
                   </div>
                 </label>
               ))}

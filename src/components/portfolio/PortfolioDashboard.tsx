@@ -399,8 +399,13 @@ export function PortfolioDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">
-                  {formatHiddenValue(formatCurrency(analytics.totalValue, settings.currency))}
+                <div className="flex items-center gap-2 mb-2">
+                  {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
+                  {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
+                  {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
+                  <div className="text-2xl font-bold">
+                    {formatHiddenValue(formatCurrency(analytics.totalValue, settings.currency))}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
                   {analytics.totalChangePercentage24h >= 0 ? (
@@ -432,10 +437,29 @@ export function PortfolioDashboard() {
               <CardContent>
                 {analytics.topPerformer ? (
                   <div>
-                    <div className="text-lg font-bold">
-                      {analytics.topPerformer.asset.symbol}
+                    <div className="flex items-center gap-2 mb-2">
+                      {analytics.topPerformer.asset.image ? (
+                        <img 
+                          src={analytics.topPerformer.asset.image} 
+                          alt={analytics.topPerformer.asset.name}
+                          className="w-6 h-6 rounded-full flex-shrink-0"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none'
+                          }}
+                        />
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-muted flex-shrink-0 flex items-center justify-center">
+                          <span className="text-xs font-medium text-muted-foreground">
+                            {analytics.topPerformer.asset.symbol.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      <div className="text-lg font-bold">
+                        {analytics.topPerformer.asset.symbol}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-2">
                       <TrendingUp className="h-4 w-4 text-green-600" />
                       <span className="text-sm font-medium text-green-600">
                         {formatPercentage(analytics.topPerformer.changePercentage)}
@@ -459,10 +483,29 @@ export function PortfolioDashboard() {
               <CardContent>
                 {analytics.worstPerformer ? (
                   <div>
-                    <div className="text-lg font-bold">
-                      {analytics.worstPerformer.asset.symbol}
+                    <div className="flex items-center gap-2 mb-2">
+                      {analytics.worstPerformer.asset.image ? (
+                        <img 
+                          src={analytics.worstPerformer.asset.image} 
+                          alt={analytics.worstPerformer.asset.name}
+                          className="w-6 h-6 rounded-full flex-shrink-0"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none'
+                          }}
+                        />
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-muted flex-shrink-0 flex items-center justify-center">
+                          <span className="text-xs font-medium text-muted-foreground">
+                            {analytics.worstPerformer.asset.symbol.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      <div className="text-lg font-bold">
+                        {analytics.worstPerformer.asset.symbol}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-2">
                       <TrendingDown className="h-4 w-4 text-red-600" />
                       <span className="text-sm font-medium text-red-600">
                         {formatPercentage(analytics.worstPerformer.changePercentage)}
@@ -568,12 +611,22 @@ export function PortfolioDashboard() {
                       {/* Asset Info */}
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          {asset.image && (
+                          {asset.image ? (
                             <img 
                               src={asset.image} 
                               alt={asset.name}
                               className="w-6 h-6 rounded-full flex-shrink-0"
+                              loading="lazy"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none'
+                              }}
                             />
+                          ) : (
+                            <div className="w-6 h-6 rounded-full bg-muted flex-shrink-0 flex items-center justify-center">
+                              <span className="text-xs font-medium text-muted-foreground">
+                                {asset.symbol.charAt(0)}
+                              </span>
+                            </div>
                           )}
                           <span className="font-medium">{asset.name}</span>
                           <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
@@ -626,12 +679,22 @@ export function PortfolioDashboard() {
                     {/* Asset Info - 6 columns */}
                     <div className="hidden sm:block sm:col-span-6">
                       <div className="flex items-center gap-4">
-                        {asset.image && (
+                        {asset.image ? (
                           <img 
                             src={asset.image} 
                             alt={asset.name}
                             className="w-8 h-8 rounded-full flex-shrink-0"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none'
+                            }}
                           />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-muted flex-shrink-0 flex items-center justify-center">
+                            <span className="text-sm font-medium text-muted-foreground">
+                              {asset.symbol.charAt(0)}
+                            </span>
+                          </div>
                         )}
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 mb-1">

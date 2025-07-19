@@ -593,7 +593,8 @@ export const usePortfolioStore = create<PortfolioState>()(
       name: 'crypto-portfolio-store',
       partialize: (state) => ({
         holdingsPortfolio: state.holdingsPortfolio,
-        settings: state.settings
+        settings: state.settings,
+        priceData: state.priceData // Persist cached price data including logos
       }),
     }
   )
