@@ -568,6 +568,13 @@ export function PortfolioDashboard() {
                       {/* Asset Info */}
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
+                          {asset.image && (
+                            <img 
+                              src={asset.image} 
+                              alt={asset.name}
+                              className="w-6 h-6 rounded-full flex-shrink-0"
+                            />
+                          )}
                           <span className="font-medium">{asset.name}</span>
                           <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
                         </div>
@@ -619,6 +626,13 @@ export function PortfolioDashboard() {
                     {/* Asset Info - 6 columns */}
                     <div className="hidden sm:block sm:col-span-6">
                       <div className="flex items-center gap-4">
+                        {asset.image && (
+                          <img 
+                            src={asset.image} 
+                            alt={asset.name}
+                            className="w-8 h-8 rounded-full flex-shrink-0"
+                          />
+                        )}
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <span className="font-medium truncate">{asset.name}</span>

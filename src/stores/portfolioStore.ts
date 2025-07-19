@@ -286,7 +286,8 @@ export const usePortfolioStore = create<PortfolioState>()(
             ...holding,
             currentPrice: price?.currentPrice,
             priceChange24h: price?.priceChange24h,
-            lastUpdated: price?.lastUpdated
+            lastUpdated: price?.lastUpdated,
+            image: holding.image || price?.image // Prefer saved image, fallback to cached
           }
         })
 
@@ -373,7 +374,8 @@ export const usePortfolioStore = create<PortfolioState>()(
               id: marketInfo.id,
               currentPrice: marketInfo.current_price,
               priceChange24h: marketInfo.price_change_percentage_24h,
-              lastUpdated: new Date()
+              lastUpdated: new Date(),
+              image: marketInfo.image
             }
           })
 

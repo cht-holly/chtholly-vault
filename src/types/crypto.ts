@@ -12,6 +12,7 @@ export interface CryptoHolding {
   quantity: number; // User's holdings
   purchasePrice?: number; // Optional: user's average purchase price
   addedDate: Date; // When user added this asset
+  image?: string; // Logo URL from CoinGecko
 }
 
 // Price data (cached - from API)
@@ -20,6 +21,7 @@ export interface CryptoPriceData {
   currentPrice: number;
   priceChange24h: number;
   lastUpdated: Date;
+  image?: string; // Logo URL from API
 }
 
 // Combined view for UI

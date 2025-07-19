@@ -53,7 +53,8 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
         symbol: selectedCrypto.symbol,
         name: selectedCrypto.name,
         quantity: parseFloat(quantity),
-        purchasePrice: purchasePrice ? parseFloat(purchasePrice) : undefined
+        purchasePrice: purchasePrice ? parseFloat(purchasePrice) : undefined,
+        image: selectedCrypto.image
       }
 
       addAsset(asset)
