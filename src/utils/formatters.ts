@@ -3,12 +3,37 @@
  */
 
 /**
- * Format currency values
+ * Check if currency needs abbreviated formatting for large numbers
+ */
+function needsAbbreviation(currency: string): boolean {
+  return ['JPY', 'KRW'].includes(currency.toUpperCase())
+}
+
+/**
+ * Format currency values with overflow protection
  */
 export function formatCurrency(value: number, currency = 'USD', decimals = 2): string {
   if (value === 0) {
     const symbol = getCurrencySymbol(currency)
-    return `${symbol}0.00`
+    return `${symbol}0${needsAbbreviation(currency) ? '' : '.00'}`
+  }
+
+  const upperCurrency = currency.toUpperCase()
+  
+  // For JPY and KRW, use abbreviated format for large numbers to prevent overflow
+  if (needsAbbreviation(upperCurrency) && value >= 10000) {
+    const symbol = getCurrencySymbol(currency)
+    
+    if (value >= 1000000) {
+      return `${symbol}${(value / 1000000).toFixed(1)}M`
+    } else if (value >= 10000) {
+      return `${symbol}${(value / 1000).toFixed(0)}K`
+    }
+  }
+  
+  // For JPY and KRW, don't show decimals for regular formatting
+  if (needsAbbreviation(upperCurrency)) {
+    decimals = 0
   }
   
   return new Intl.NumberFormat('en-US', {
@@ -32,6 +57,14 @@ export function getCurrencySymbol(currency: string): string {
       return 'RM'
     case 'CNY':
       return '¥'
+    case 'JPY':
+      return '¥'
+    case 'KRW':
+      return '₩'
+    case 'TWD':
+      return 'NT$'
+    case 'EUR':
+      return '€'
     default:
       return currency
   }

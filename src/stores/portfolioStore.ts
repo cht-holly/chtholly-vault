@@ -421,7 +421,11 @@ export const usePortfolioStore = create<PortfolioState>()(
         const fixedRates = {
           'USD-SGD': { fromCurrency: 'USD', toCurrency: 'SGD', rate: 1.35, timestamp: new Date() },
           'USD-MYR': { fromCurrency: 'USD', toCurrency: 'MYR', rate: 4.48, timestamp: new Date() },
-          'USD-CNY': { fromCurrency: 'USD', toCurrency: 'CNY', rate: 7.25, timestamp: new Date() }
+          'USD-CNY': { fromCurrency: 'USD', toCurrency: 'CNY', rate: 7.25, timestamp: new Date() },
+          'USD-JPY': { fromCurrency: 'USD', toCurrency: 'JPY', rate: 150, timestamp: new Date() },
+          'USD-KRW': { fromCurrency: 'USD', toCurrency: 'KRW', rate: 1320, timestamp: new Date() },
+          'USD-TWD': { fromCurrency: 'USD', toCurrency: 'TWD', rate: 31.5, timestamp: new Date() },
+          'USD-EUR': { fromCurrency: 'USD', toCurrency: 'EUR', rate: 0.92, timestamp: new Date() }
         }
         
         const rate = fixedRates[`USD-${settings.currency}`]

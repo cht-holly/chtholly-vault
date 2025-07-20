@@ -49,9 +49,13 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
   const currencyOptions = [
     { value: 'USD', label: 'US Dollar (USD)', symbol: '$', flag: '🇺🇸' },
+    { value: 'EUR', label: 'Euro (EUR)', symbol: '€', flag: '🇪🇺' },
     { value: 'SGD', label: 'Singapore Dollar (SGD)', symbol: 'S$', flag: '🇸🇬' },
     { value: 'MYR', label: 'Malaysian Ringgit (MYR)', symbol: 'RM', flag: '🇲🇾' },
-    { value: 'CNY', label: 'Chinese Yuan (CNY)', symbol: '¥', flag: '🇨🇳' }
+    { value: 'CNY', label: 'Chinese Yuan (CNY)', symbol: '¥', flag: '🇨🇳' },
+    { value: 'JPY', label: 'Japanese Yen (JPY)', symbol: '¥', flag: '🇯🇵' },
+    { value: 'KRW', label: 'Korean Won (KRW)', symbol: '₩', flag: '🇰🇷' },
+    { value: 'TWD', label: 'Taiwan Dollar (TWD)', symbol: 'NT$', flag: '🇹🇼' }
   ]
 
   const refreshIntervalOptions = [
@@ -64,45 +68,52 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg max-h-[95vh] sm:max-h-[90vh] flex flex-col p-0">
-        <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
+      <DialogContent className="sm:max-w-2xl max-h-[90vh] sm:max-h-none flex flex-col p-0 my-4 sm:my-8">
+        <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-2 shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Settings className="h-5 w-5" />
             Settings
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto px-6">
-          <form onSubmit={handleSubmit} className="space-y-6 pb-6">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6">
+          <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 pb-4 sm:pb-6">
             {/* Currency Selection */}
             <div className="space-y-3">
               <Label className="text-sm font-medium">Display Currency</Label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {currencyOptions.map((option) => (
                   <label
                     key={option.value}
-                    className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
-                >
-                  <input
-                    type="radio"
-                    name="currency"
-                    value={option.value}
-                    checked={localSettings.currency === option.value}
-                    onChange={(e) =>
-                      setLocalSettings({
-                        ...localSettings,
-                        currency: e.target.value as 'USD' | 'SGD' | 'MYR' | 'CNY'
-                      })
-                    }
-                    className="w-4 h-4"
-                  />
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-1">
-                      <span className="text-lg">{option.flag}</span>
-                      <div className="font-medium text-sm">{option.value}</div>
+                    className={`flex flex-col items-center space-y-1.5 cursor-pointer p-2.5 rounded-lg border transition-all relative ${
+                      localSettings.currency === option.value 
+                        ? 'border-primary bg-primary/10 ring-2 ring-primary/20' 
+                        : 'hover:bg-muted/50 hover:border-border'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="currency"
+                      value={option.value}
+                      checked={localSettings.currency === option.value}
+                      onChange={(e) =>
+                        setLocalSettings({
+                          ...localSettings,
+                          currency: e.target.value as 'USD' | 'SGD' | 'MYR' | 'CNY' | 'JPY' | 'KRW' | 'TWD' | 'EUR'
+                        })
+                      }
+                      className="sr-only"
+                    />
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-1 mb-0.5">
+                        <span className="text-base">{option.flag}</span>
+                        <div className="font-medium text-xs">{option.value}</div>
+                      </div>
+                      <div className="text-xs text-muted-foreground truncate max-w-full">
+                        {option.label.split(' (')[0]}
+                      </div>
                     </div>
-                  </div>
-                </label>
+                  </label>
               ))}
             </div>
           </div>
@@ -110,29 +121,33 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             {/* Refresh Interval */}
             <div className="space-y-3">
               <Label className="text-sm font-medium">Refresh Interval</Label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                 {refreshIntervalOptions.map((option) => (
                   <label
                     key={option.value}
-                    className="flex flex-col items-center space-y-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
-                >
-                  <input
-                    type="radio"
-                    name="refreshInterval"
-                    value={option.value}
-                    checked={localSettings.refreshInterval === option.value}
-                    onChange={(e) =>
-                      setLocalSettings({
-                        ...localSettings,
-                        refreshInterval: parseInt(e.target.value)
-                      })
-                    }
-                    className="w-4 h-4"
-                  />
-                  <div className="text-center">
-                    <div className="font-medium text-sm">{option.label}</div>
-                  </div>
-                </label>
+                    className={`flex flex-col items-center space-y-1.5 cursor-pointer p-2.5 rounded-lg border transition-all ${
+                      localSettings.refreshInterval === option.value
+                        ? 'border-primary bg-primary/10 ring-2 ring-primary/20'
+                        : 'hover:bg-muted/50 hover:border-border'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="refreshInterval"
+                      value={option.value}
+                      checked={localSettings.refreshInterval === option.value}
+                      onChange={(e) =>
+                        setLocalSettings({
+                          ...localSettings,
+                          refreshInterval: parseInt(e.target.value)
+                        })
+                      }
+                      className="sr-only"
+                    />
+                    <div className="text-center">
+                      <div className="font-medium text-sm">{option.label}</div>
+                    </div>
+                  </label>
               ))}
             </div>
           </div>
