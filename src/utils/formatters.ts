@@ -30,6 +30,8 @@ export function getCurrencySymbol(currency: string): string {
       return 'S$'
     case 'MYR':
       return 'RM'
+    case 'CNY':
+      return '¥'
     default:
       return currency
   }

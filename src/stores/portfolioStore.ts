@@ -420,7 +420,8 @@ export const usePortfolioStore = create<PortfolioState>()(
         // Use fixed exchange rates
         const fixedRates = {
           'USD-SGD': { fromCurrency: 'USD', toCurrency: 'SGD', rate: 1.35, timestamp: new Date() },
-          'USD-MYR': { fromCurrency: 'USD', toCurrency: 'MYR', rate: 4.48, timestamp: new Date() }
+          'USD-MYR': { fromCurrency: 'USD', toCurrency: 'MYR', rate: 4.48, timestamp: new Date() },
+          'USD-CNY': { fromCurrency: 'USD', toCurrency: 'CNY', rate: 7.25, timestamp: new Date() }
         }
         
         const rate = fixedRates[`USD-${settings.currency}`]

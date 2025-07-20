@@ -407,6 +407,7 @@ export function PortfolioDashboard() {
                   {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
                   {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
                   {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
+                  {settings.currency === 'CNY' && <span className="text-lg">🇨🇳</span>}
                   <div className="text-2xl font-bold">
                     {formatHiddenValue(formatCurrency(analytics.totalValue, settings.currency))}
                   </div>

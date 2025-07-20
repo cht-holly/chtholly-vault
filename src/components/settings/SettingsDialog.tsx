@@ -50,7 +50,8 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
   const currencyOptions = [
     { value: 'USD', label: 'US Dollar (USD)', symbol: '$', flag: '🇺🇸' },
     { value: 'SGD', label: 'Singapore Dollar (SGD)', symbol: 'S$', flag: '🇸🇬' },
-    { value: 'MYR', label: 'Malaysian Ringgit (MYR)', symbol: 'RM', flag: '🇲🇾' }
+    { value: 'MYR', label: 'Malaysian Ringgit (MYR)', symbol: 'RM', flag: '🇲🇾' },
+    { value: 'CNY', label: 'Chinese Yuan (CNY)', symbol: '¥', flag: '🇨🇳' }
   ]
 
   const refreshIntervalOptions = [
@@ -76,7 +77,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             {/* Currency Selection */}
             <div className="space-y-3">
               <Label className="text-sm font-medium">Display Currency</Label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {currencyOptions.map((option) => (
                   <label
                     key={option.value}
@@ -90,7 +91,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
                     onChange={(e) =>
                       setLocalSettings({
                         ...localSettings,
-                        currency: e.target.value as 'USD' | 'SGD' | 'MYR'
+                        currency: e.target.value as 'USD' | 'SGD' | 'MYR' | 'CNY'
                       })
                     }
                     className="w-4 h-4"

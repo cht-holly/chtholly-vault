@@ -67,7 +67,7 @@ export interface CryptoListItem {
 
 export interface AppSettings {
   refreshInterval: number; // Default: 60 seconds
-  currency: 'USD' | 'SGD' | 'MYR'; // Default: 'USD'
+  currency: 'USD' | 'SGD' | 'MYR' | 'CNY'; // Default: 'USD'
   theme: 'light' | 'dark' | 'system';
   autoRefresh: boolean; // Default: true
   hideValues: boolean; // Default: false
