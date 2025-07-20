@@ -391,7 +391,11 @@ export function PortfolioDashboard() {
 
         {/* Portfolio Overview */}
         {analytics && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={`grid grid-cols-1 gap-6 ${
+            portfolio.assets.some(asset => asset.purchasePrice) 
+              ? 'md:grid-cols-4' 
+              : 'md:grid-cols-3'
+          }`}>
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -427,6 +431,40 @@ export function PortfolioDashboard() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Total P&L Card - only show if any asset has purchase price */}
+            {portfolio.assets.some(asset => asset.purchasePrice) && (
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                    Total P&L
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className={`text-2xl font-bold ${
+                      analytics.totalProfitLoss >= 0 ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {analytics.totalProfitLoss >= 0 ? '+' : ''}
+                      {formatHiddenValue(formatCurrency(analytics.totalProfitLoss, settings.currency))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 mt-2">
+                    {analytics.totalProfitLoss >= 0 ? (
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                    ) : (
+                      <TrendingDown className="h-4 w-4 text-red-600" />
+                    )}
+                    <div className={`text-sm font-medium ${
+                      analytics.totalProfitLoss >= 0 ? 'text-green-600' : 'text-red-600'
+                    }`}>
+                      {formatPercentage(analytics.totalProfitLossPercentage)}
+                    </div>
+                    <span className="text-sm text-muted-foreground">vs cost</span>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             <Card>
               <CardHeader className="pb-3">

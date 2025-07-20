@@ -495,6 +495,8 @@ export const usePortfolioStore = create<PortfolioState>()(
 
         let totalValue = 0
         let totalChange24h = 0
+        let totalProfitLoss = 0
+        let totalCostBasis = 0
         let topPerformer: { asset: CryptoAsset; changePercentage: number } | null = null
         let worstPerformer: { asset: CryptoAsset; changePercentage: number } | null = null
         const assetDistribution: { asset: CryptoAsset; value: number; percentage: number }[] = []
@@ -508,6 +510,13 @@ export const usePortfolioStore = create<PortfolioState>()(
           
           totalValue += value
           totalChange24h += (value * change24h) / 100
+
+          // Calculate P&L if purchase price is available
+          if (asset.purchasePrice) {
+            const costBasis = convertAmount(asset.purchasePrice * asset.quantity, 'USD')
+            totalCostBasis += costBasis
+            totalProfitLoss += (value - costBasis)
+          }
 
           // Track top and worst performers
           if (topPerformer === null || change24h > topPerformer.changePercentage) {
@@ -529,11 +538,14 @@ export const usePortfolioStore = create<PortfolioState>()(
         assetDistribution.sort((a, b) => b.value - a.value)
 
         const totalChangePercentage24h = totalValue > 0 ? (totalChange24h / totalValue) * 100 : 0
+        const totalProfitLossPercentage = totalCostBasis > 0 ? (totalProfitLoss / totalCostBasis) * 100 : 0
 
         const analytics: PortfolioAnalytics = {
           totalValue,
           totalChange24h,
           totalChangePercentage24h,
+          totalProfitLoss,
+          totalProfitLossPercentage,
           topPerformer,
           worstPerformer,
           assetDistribution

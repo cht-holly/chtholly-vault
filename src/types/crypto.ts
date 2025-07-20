@@ -120,6 +120,8 @@ export interface PortfolioAnalytics {
   totalValue: number;
   totalChange24h: number;
   totalChangePercentage24h: number;
+  totalProfitLoss: number;
+  totalProfitLossPercentage: number;
   topPerformer: {
     asset: CryptoAsset;
     changePercentage: number;
