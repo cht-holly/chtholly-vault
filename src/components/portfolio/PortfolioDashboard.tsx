@@ -399,20 +399,15 @@ export function PortfolioDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="mb-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
-                    {settings.currency === 'EUR' && <span className="text-lg">🇪🇺</span>}
-                    {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
-                    {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
-                    {settings.currency === 'CNY' && <span className="text-lg">🇨🇳</span>}
-                    {settings.currency === 'JPY' && <span className="text-lg">🇯🇵</span>}
-                    {settings.currency === 'KRW' && <span className="text-lg">🇰🇷</span>}
-                    {settings.currency === 'TWD' && <span className="text-lg">🇹🇼</span>}
-                    <span className="text-sm text-muted-foreground font-medium">
-                      {settings.currency}
-                    </span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
+                  {settings.currency === 'EUR' && <span className="text-lg">🇪🇺</span>}
+                  {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
+                  {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
+                  {settings.currency === 'CNY' && <span className="text-lg">🇨🇳</span>}
+                  {settings.currency === 'JPY' && <span className="text-lg">🇯🇵</span>}
+                  {settings.currency === 'KRW' && <span className="text-lg">🇰🇷</span>}
+                  {settings.currency === 'TWD' && <span className="text-lg">🇹🇼</span>}
                   <div className="text-2xl font-bold">
                     {formatHiddenValue(formatCurrency(analytics.totalValue, settings.currency))}
                   </div>
