@@ -391,11 +391,7 @@ export function PortfolioDashboard() {
 
         {/* Portfolio Overview */}
         {analytics && (
-          <div className={`grid grid-cols-1 gap-6 ${
-            portfolio.assets.some(asset => asset.purchasePrice) 
-              ? 'md:grid-cols-4' 
-              : 'md:grid-cols-3'
-          }`}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -403,15 +399,20 @@ export function PortfolioDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center gap-2 mb-2">
-                  {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
-                  {settings.currency === 'EUR' && <span className="text-lg">🇪🇺</span>}
-                  {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
-                  {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
-                  {settings.currency === 'CNY' && <span className="text-lg">🇨🇳</span>}
-                  {settings.currency === 'JPY' && <span className="text-lg">🇯🇵</span>}
-                  {settings.currency === 'KRW' && <span className="text-lg">🇰🇷</span>}
-                  {settings.currency === 'TWD' && <span className="text-lg">🇹🇼</span>}
+                <div className="mb-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    {settings.currency === 'USD' && <span className="text-lg">🇺🇸</span>}
+                    {settings.currency === 'EUR' && <span className="text-lg">🇪🇺</span>}
+                    {settings.currency === 'SGD' && <span className="text-lg">🇸🇬</span>}
+                    {settings.currency === 'MYR' && <span className="text-lg">🇲🇾</span>}
+                    {settings.currency === 'CNY' && <span className="text-lg">🇨🇳</span>}
+                    {settings.currency === 'JPY' && <span className="text-lg">🇯🇵</span>}
+                    {settings.currency === 'KRW' && <span className="text-lg">🇰🇷</span>}
+                    {settings.currency === 'TWD' && <span className="text-lg">🇹🇼</span>}
+                    <span className="text-sm text-muted-foreground font-medium">
+                      {settings.currency}
+                    </span>
+                  </div>
                   <div className="text-2xl font-bold">
                     {formatHiddenValue(formatCurrency(analytics.totalValue, settings.currency))}
                   </div>
@@ -425,9 +426,9 @@ export function PortfolioDashboard() {
                   <div className={`text-sm font-medium ${
                     analytics.totalChangePercentage24h >= 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
-                    <div className="flex items-center gap-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1">
                       <span>{formatPercentage(analytics.totalChangePercentage24h)}</span>
-                      <span>
+                      <span className="text-xs sm:text-sm">
                         ({analytics.totalChangePercentage24h >= 0 ? '+' : ''}{formatHiddenValue(formatCurrency(analytics.totalChange24h, settings.currency))})
                       </span>
                     </div>
@@ -446,7 +447,7 @@ export function PortfolioDashboard() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="mb-2">
                     <div className={`text-2xl font-bold ${
                       analytics.totalProfitLoss >= 0 ? 'text-green-600' : 'text-red-600'
                     }`}>
@@ -503,8 +504,14 @@ export function PortfolioDashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4 text-green-600" />
-                      <span className="text-sm font-medium text-green-600">
+                      {analytics.topPerformer.changePercentage >= 0 ? (
+                        <TrendingUp className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <TrendingDown className="h-4 w-4 text-red-600" />
+                      )}
+                      <span className={`text-sm font-medium ${
+                        analytics.topPerformer.changePercentage >= 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
                         {formatPercentage(analytics.topPerformer.changePercentage)}
                       </span>
                     </div>
@@ -517,12 +524,14 @@ export function PortfolioDashboard() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  Worst Performer
-                </CardTitle>
-              </CardHeader>
+            {/* Worst Performer Card - only show if P&L data is not available */}
+            {!portfolio.assets.some(asset => asset.purchasePrice) && (
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                    Worst Performer
+                  </CardTitle>
+                </CardHeader>
               <CardContent>
                 {analytics.worstPerformer ? (
                   <div>
@@ -549,8 +558,14 @@ export function PortfolioDashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <TrendingDown className="h-4 w-4 text-red-600" />
-                      <span className="text-sm font-medium text-red-600">
+                      {analytics.worstPerformer.changePercentage >= 0 ? (
+                        <TrendingUp className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <TrendingDown className="h-4 w-4 text-red-600" />
+                      )}
+                      <span className={`text-sm font-medium ${
+                        analytics.worstPerformer.changePercentage >= 0 ? 'text-green-600' : 'text-red-600'
+                      }`}>
                         {formatPercentage(analytics.worstPerformer.changePercentage)}
                       </span>
                     </div>
@@ -562,6 +577,7 @@ export function PortfolioDashboard() {
                 )}
               </CardContent>
             </Card>
+            )}
           </div>
         )}
 
