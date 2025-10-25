@@ -651,9 +651,13 @@ export function PortfolioDashboard() {
                 const currentValue = currentPrice * asset.quantity
                 const priceChange = asset.priceChange24h || 0
                 const absoluteChange24h = currentValue * (priceChange / 100)
-                const profitLoss = asset.purchasePrice 
+                const profitLoss = asset.purchasePrice
                   ? convertAmount((currentPriceUSD - asset.purchasePrice) * asset.quantity, 'USD')
                   : null
+
+                // Unit price display: respect showPricesInUSD setting
+                const displayPrice = settings.showPricesInUSD ? currentPriceUSD : currentPrice
+                const displayCurrency = settings.showPricesInUSD ? 'USD' : settings.currency
 
                 return (
                   <div
@@ -697,8 +701,13 @@ export function PortfolioDashboard() {
                       
                       {/* Quantity and Value */}
                       <div className="flex items-center justify-between">
-                        <div className="text-sm text-muted-foreground">
-                          {formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}
+                        <div className="space-y-0.5">
+                          <div className="text-sm text-muted-foreground">
+                            {formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}
+                          </div>
+                          <div className="text-xs text-muted-foreground/70">
+                            @ {formatHiddenValue(formatCurrency(displayPrice, displayCurrency))}
+                          </div>
                         </div>
                         <div className="text-right">
                           <div className="font-medium">
@@ -755,8 +764,12 @@ export function PortfolioDashboard() {
                             <span className="font-medium truncate">{asset.name}</span>
                             <Badge variant="outline" className="shrink-0">{asset.symbol}</Badge>
                           </div>
-                          <div className="text-sm text-muted-foreground">
-                            {formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}
+                          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                            <span>{formatHiddenValue(`${asset.quantity} ${asset.symbol}`)}</span>
+                            <span className="text-muted-foreground/50">•</span>
+                            <span className="text-xs text-muted-foreground/70">
+                              @ {formatHiddenValue(formatCurrency(displayPrice, displayCurrency))}
+                            </span>
                           </div>
                         </div>
                       </div>

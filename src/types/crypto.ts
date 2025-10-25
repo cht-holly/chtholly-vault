@@ -71,6 +71,7 @@ export interface AppSettings {
   theme: 'light' | 'dark' | 'system';
   autoRefresh: boolean; // Default: true
   hideValues: boolean; // Default: false
+  showPricesInUSD: boolean; // Default: false - Show unit prices always in USD regardless of currency setting
 }
 
 // CoinGecko API Response Types
