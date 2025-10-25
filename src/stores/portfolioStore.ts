@@ -90,7 +90,8 @@ const defaultSettings: AppSettings = {
   currency: 'USD',
   theme: 'system',
   autoRefresh: true,
-  hideValues: false
+  hideValues: false,
+  showPricesInUSD: false
 }
 
 // Default holdings portfolio

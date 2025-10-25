@@ -152,53 +152,91 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
             </div>
           </div>
 
-            {/* Auto Refresh Toggle */}
+            {/* Toggles - Side by side on desktop */}
             <div className="space-y-3">
-              <Label className="text-sm font-medium">Auto Refresh</Label>
-              <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
+                {/* Auto Refresh Toggle */}
+                <div>
+                  <Label className="text-sm font-medium mb-3 block">Auto Refresh</Label>
+                <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                  <div className="flex-1 pr-3">
+                    <div className="font-medium text-sm">Automatic updates</div>
+                    <div className="text-xs text-muted-foreground">
+                      Refresh prices in background
+                    </div>
+                  </div>
+                  <div className="relative inline-flex items-center shrink-0">
+                    <input
+                      type="checkbox"
+                      checked={localSettings.autoRefresh}
+                      onChange={(e) =>
+                        setLocalSettings({
+                          ...localSettings,
+                          autoRefresh: e.target.checked
+                        })
+                      }
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </div>
+                </label>
+              </div>
+
+              {/* Unit Price Display */}
               <div>
-                <div className="font-medium text-sm">Enable automatic updates</div>
-                <div className="text-xs text-muted-foreground">
-                  Prices update automatically in background
+                <Label className="text-sm font-medium mb-3 block">Unit Price Display</Label>
+                <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                  <div className="flex-1 pr-3">
+                    <div className="font-medium text-sm">Show prices in USD</div>
+                    <div className="text-xs text-muted-foreground">
+                      Always display in USD
+                    </div>
+                  </div>
+                  <div className="relative inline-flex items-center shrink-0">
+                    <input
+                      type="checkbox"
+                      checked={localSettings.showPricesInUSD}
+                      onChange={(e) =>
+                        setLocalSettings({
+                          ...localSettings,
+                          showPricesInUSD: e.target.checked
+                        })
+                      }
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </div>
+                </label>
                 </div>
               </div>
-              <input
-                type="checkbox"
-                checked={localSettings.autoRefresh}
-                onChange={(e) =>
-                  setLocalSettings({
-                    ...localSettings,
-                    autoRefresh: e.target.checked
-                  })
-                }
-                className="w-4 h-4"
-              />
-            </label>
-          </div>
+            </div>
 
-            {/* Hide Values Toggle */}
+            {/* Privacy Settings */}
             <div className="space-y-3">
               <Label className="text-sm font-medium">Privacy</Label>
               <label className="flex items-center justify-between cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors">
-              <div>
-                <div className="font-medium text-sm">Hide portfolio values</div>
-                <div className="text-xs text-muted-foreground">
-                  Show asterisks instead of actual amounts
+                <div className="flex-1 pr-3">
+                  <div className="font-medium text-sm">Hide portfolio values</div>
+                  <div className="text-xs text-muted-foreground">
+                    Show asterisks instead of actual amounts
+                  </div>
                 </div>
-              </div>
-              <input
-                type="checkbox"
-                checked={localSettings.hideValues}
-                onChange={(e) =>
-                  setLocalSettings({
-                    ...localSettings,
-                    hideValues: e.target.checked
-                  })
-                }
-                className="w-4 h-4"
-              />
-            </label>
-          </div>
+                <div className="relative inline-flex items-center shrink-0">
+                  <input
+                    type="checkbox"
+                    checked={localSettings.hideValues}
+                    onChange={(e) =>
+                      setLocalSettings({
+                        ...localSettings,
+                        hideValues: e.target.checked
+                      })
+                    }
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                </div>
+              </label>
+            </div>
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
