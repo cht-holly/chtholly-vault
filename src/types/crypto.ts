@@ -11,6 +11,7 @@ export interface CryptoHolding {
   name: string; // e.g., "Bitcoin"
   quantity: number; // User's holdings
   purchasePrice?: number; // Optional: user's average purchase price
+  targetMultiplier?: number; // Optional: target profit multiplier (e.g., 1.5 = 150%)
   addedDate: Date; // When user added this asset
   image?: string; // Logo URL from CoinGecko
 }
@@ -72,6 +73,7 @@ export interface AppSettings {
   autoRefresh: boolean; // Default: true
   hideValues: boolean; // Default: false
   showPricesInUSD: boolean; // Default: false - Show unit prices always in USD regardless of currency setting
+  showTargetPrices: boolean; // Default: false - Show target prices using multiplier instead of current prices
 }
 
 // CoinGecko API Response Types

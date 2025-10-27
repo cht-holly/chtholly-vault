@@ -24,8 +24,9 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoListItem | null>(null)
   const [quantity, setQuantity] = useState('')
   const [purchasePrice, setPurchasePrice] = useState('')
+  const [targetMultiplier, setTargetMultiplier] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  
+
   const { addAsset, portfolio } = usePortfolioStore()
 
   const handleCryptoSelect = (crypto: CryptoListItem) => {
@@ -36,6 +37,7 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
     setSelectedCrypto(null)
     setQuantity('')
     setPurchasePrice('')
+    setTargetMultiplier('')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,15 +56,17 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
         name: selectedCrypto.name,
         quantity: parseFloat(quantity),
         purchasePrice: purchasePrice ? parseFloat(purchasePrice) : undefined,
+        targetMultiplier: targetMultiplier ? parseFloat(targetMultiplier) : undefined,
         image: selectedCrypto.image
       }
 
       addAsset(asset)
-      
+
       // Reset form and close dialog
       setSelectedCrypto(null)
       setQuantity('')
       setPurchasePrice('')
+      setTargetMultiplier('')
       onOpenChange(false)
     } catch (error) {
       console.error('Error adding asset:', error)
@@ -75,6 +79,7 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
     setSelectedCrypto(null)
     setQuantity('')
     setPurchasePrice('')
+    setTargetMultiplier('')
     onOpenChange(false)
   }
 
@@ -163,6 +168,22 @@ export function AddAssetDialog({ open, onOpenChange }: AddAssetDialogProps) {
                 />
                 <p className="text-xs text-muted-foreground mt-1">
                   Your average purchase price for profit/loss calculation
+                </p>
+              </div>
+
+              <div>
+                <Label htmlFor="targetMultiplier">Target Multiplier (Optional)</Label>
+                <Input
+                  id="targetMultiplier"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  placeholder="e.g., 1.5 for 150%"
+                  value={targetMultiplier}
+                  onChange={(e) => setTargetMultiplier(e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Target profit multiplier (1.5 = 150%, 2 = 200%)
                 </p>
               </div>
 

@@ -150,8 +150,19 @@ export function PortfolioDashboard() {
 
       switch (sortBy) {
         case 'value':
-          aValue = convertAmount(a.currentPrice || 0, 'USD') * a.quantity
-          bValue = convertAmount(b.currentPrice || 0, 'USD') * b.quantity
+          let aPriceUSD = convertAmount(a.currentPrice || 0, 'USD')
+          let bPriceUSD = convertAmount(b.currentPrice || 0, 'USD')
+
+          // Apply target multiplier if enabled
+          if (settings.showTargetPrices && a.targetMultiplier) {
+            aPriceUSD = aPriceUSD * a.targetMultiplier
+          }
+          if (settings.showTargetPrices && b.targetMultiplier) {
+            bPriceUSD = bPriceUSD * b.targetMultiplier
+          }
+
+          aValue = aPriceUSD * a.quantity
+          bValue = bPriceUSD * b.quantity
           break
         case 'name':
           aValue = a.name.toLowerCase()
@@ -647,7 +658,13 @@ export function PortfolioDashboard() {
             <div className="space-y-4">
               {getSortedAssets().map((asset) => {
                 const currentPriceUSD = asset.currentPrice || 0
-                const currentPrice = convertAmount(currentPriceUSD, 'USD')
+                let currentPrice = convertAmount(currentPriceUSD, 'USD')
+
+                // Apply target multiplier to price if enabled
+                if (settings.showTargetPrices && asset.targetMultiplier) {
+                  currentPrice = currentPrice * asset.targetMultiplier
+                }
+
                 const currentValue = currentPrice * asset.quantity
                 const priceChange = asset.priceChange24h || 0
                 const absoluteChange24h = currentValue * (priceChange / 100)
@@ -655,9 +672,14 @@ export function PortfolioDashboard() {
                   ? convertAmount((currentPriceUSD - asset.purchasePrice) * asset.quantity, 'USD')
                   : null
 
-                // Unit price display: respect showPricesInUSD setting
-                const displayPrice = settings.showPricesInUSD ? currentPriceUSD : currentPrice
+                // Unit price display: respect showPricesInUSD and showTargetPrices settings
+                let displayPrice = settings.showPricesInUSD ? currentPriceUSD : currentPrice
                 const displayCurrency = settings.showPricesInUSD ? 'USD' : settings.currency
+
+                // Apply target multiplier to display price if enabled (for USD mode)
+                if (settings.showTargetPrices && asset.targetMultiplier && settings.showPricesInUSD) {
+                  displayPrice = displayPrice * asset.targetMultiplier
+                }
 
                 return (
                   <div

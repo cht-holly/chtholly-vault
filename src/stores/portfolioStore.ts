@@ -50,6 +50,7 @@ interface PortfolioState {
   removeHolding: (holdingId: string) => void
   updateHoldingQuantity: (holdingId: string, quantity: number) => void
   updateHoldingPurchasePrice: (holdingId: string, price: number) => void
+  updateHoldingTargetMultiplier: (holdingId: string, multiplier: number | undefined) => void
   importHoldings: (holdings: CryptoHolding[]) => void
   exportHoldings: () => void
   
@@ -91,7 +92,8 @@ const defaultSettings: AppSettings = {
   theme: 'system',
   autoRefresh: true,
   hideValues: false,
-  showPricesInUSD: false
+  showPricesInUSD: false,
+  showTargetPrices: false
 }
 
 // Default holdings portfolio
@@ -197,6 +199,23 @@ export const usePortfolioStore = create<PortfolioState>()(
           holdings: holdingsPortfolio.holdings.map(holding =>
             holding.id === holdingId
               ? { ...holding, purchasePrice: price }
+              : holding
+          ),
+          lastUpdated: new Date()
+        }
+
+        set({ holdingsPortfolio: updatedHoldingsPortfolio })
+        get().combineHoldingsWithPrices()
+        get().calculateAnalytics()
+      },
+
+      updateHoldingTargetMultiplier: (holdingId, multiplier) => {
+        const { holdingsPortfolio } = get()
+        const updatedHoldingsPortfolio = {
+          ...holdingsPortfolio,
+          holdings: holdingsPortfolio.holdings.map(holding =>
+            holding.id === holdingId
+              ? { ...holding, targetMultiplier: multiplier }
               : holding
           ),
           lastUpdated: new Date()
@@ -492,8 +511,8 @@ export const usePortfolioStore = create<PortfolioState>()(
 
       // Analytics calculation
       calculateAnalytics: () => {
-        const { portfolio, convertAmount } = get()
-        
+        const { portfolio, convertAmount, settings } = get()
+
         if (portfolio.assets.length === 0) {
           set({ analytics: null })
           return
@@ -510,10 +529,16 @@ export const usePortfolioStore = create<PortfolioState>()(
         // Calculate individual asset values and changes
         portfolio.assets.forEach(asset => {
           const currentPriceUSD = asset.currentPrice || 0
-          const currentPrice = convertAmount(currentPriceUSD, 'USD')
+          let currentPrice = convertAmount(currentPriceUSD, 'USD')
+
+          // Apply target multiplier if enabled
+          if (settings.showTargetPrices && asset.targetMultiplier) {
+            currentPrice = currentPrice * asset.targetMultiplier
+          }
+
           const value = currentPrice * asset.quantity
           const change24h = asset.priceChange24h || 0
-          
+
           totalValue += value
           totalChange24h += (value * change24h) / 100
 

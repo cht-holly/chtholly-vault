@@ -22,15 +22,17 @@ interface EditAssetDialogProps {
 export function EditAssetDialog({ open, onOpenChange, asset }: EditAssetDialogProps) {
   const [quantity, setQuantity] = useState('')
   const [purchasePrice, setPurchasePrice] = useState('')
+  const [targetMultiplier, setTargetMultiplier] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  
-  const { updateAssetQuantity, updateAssetPurchasePrice, removeAsset } = usePortfolioStore()
+
+  const { updateAssetQuantity, updateAssetPurchasePrice, updateHoldingTargetMultiplier, removeAsset } = usePortfolioStore()
 
   // Update form when asset changes
   useEffect(() => {
     if (asset) {
       setQuantity(asset.quantity.toString())
       setPurchasePrice(asset.purchasePrice?.toString() || '')
+      setTargetMultiplier(asset.targetMultiplier?.toString() || '')
     }
   }, [asset])
 
@@ -46,12 +48,19 @@ export function EditAssetDialog({ open, onOpenChange, asset }: EditAssetDialogPr
     try {
       // Update quantity
       updateAssetQuantity(asset.id, parseFloat(quantity))
-      
+
       // Update purchase price if provided
       if (purchasePrice) {
         updateAssetPurchasePrice(asset.id, parseFloat(purchasePrice))
       }
-      
+
+      // Update target multiplier if provided
+      if (targetMultiplier) {
+        updateHoldingTargetMultiplier(asset.id, parseFloat(targetMultiplier))
+      } else {
+        updateHoldingTargetMultiplier(asset.id, undefined)
+      }
+
       // Close dialog
       onOpenChange(false)
     } catch (error) {
@@ -126,6 +135,22 @@ export function EditAssetDialog({ open, onOpenChange, asset }: EditAssetDialogPr
               />
               <p className="text-xs text-muted-foreground mt-1">
                 Your average purchase price for profit/loss calculation
+              </p>
+            </div>
+
+            <div>
+              <Label htmlFor="edit-targetMultiplier">Target Multiplier (Optional)</Label>
+              <Input
+                id="edit-targetMultiplier"
+                type="number"
+                step="0.1"
+                min="0"
+                placeholder="e.g., 1.5 for 150%"
+                value={targetMultiplier}
+                onChange={(e) => setTargetMultiplier(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Target profit multiplier (1.5 = 150%, 2 = 200%)
               </p>
             </div>
 
