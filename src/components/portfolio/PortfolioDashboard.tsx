@@ -668,8 +668,10 @@ export function PortfolioDashboard() {
                 const currentValue = currentPrice * asset.quantity
                 const priceChange = asset.priceChange24h || 0
                 const absoluteChange24h = currentValue * (priceChange / 100)
+
+                // Calculate P&L: use target price if enabled, otherwise use current price
                 const profitLoss = asset.purchasePrice
-                  ? convertAmount((currentPriceUSD - asset.purchasePrice) * asset.quantity, 'USD')
+                  ? currentPrice * asset.quantity - convertAmount(asset.purchasePrice * asset.quantity, 'USD')
                   : null
 
                 // Unit price display: respect showPricesInUSD and showTargetPrices settings
